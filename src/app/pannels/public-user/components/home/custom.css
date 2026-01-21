@@ -1,0 +1,16 @@
+.main-content-wrapper {
+    max-width: 1600px; /* Adjust as needed */
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .main-content-wrapper {
+        padding: 0 30px; /* Increased padding for medium screens */
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-content-wrapper {
+        padding: 0 60px; /* Further increased padding for larger screens */
+    }
+}

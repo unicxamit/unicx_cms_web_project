@@ -1,0 +1,928 @@
+.header-style-3 {
+    position: relative;
+    /*--is fixed---*/
+    /*====Mobile Side =======*/
+    /*---when header is sticky---*/
+    /*---when header is sticky---*/
+    /*---header id Fixed---*/
+}
+
+.header-style-3 .header-nav-btn-section {
+    float: right;
+    display: flex;
+}
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-left {
+    margin-right: 10px;
+}
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-left .twm-nav-sign-up {
+    background-color: #e0eeff;
+    color: #1967d2;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 8px 15px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+    text-decoration: none;
+    font-weight: 550;
+}
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-left .twm-nav-sign-up:before {
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    right: 100%;
+    bottom: 0px;
+    content: "";
+    background-color: #3898e2;
+    opacity: 0.1;
+    z-index: -1;
+    transition: 0.5s all ease;
+}
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-left .twm-nav-sign-up i {
+    padding-right: 5px;
+}
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-left .twm-nav-sign-up:hover:before {
+    width: 100%;
+    right: 0%;
+    opacity: 0.1;
+}
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-right {
+    margin-right: 10px;
+}
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-right .twm-nav-post-a-job {
+    background-color: #1967d2;
+    color: #f0f6fe;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 8px 15px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    font-weight: 550;
+}
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-right .twm-nav-post-a-job:before {
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    right: 100%;
+    bottom: 0px;
+    content: "";
+    background-color: #17171d;
+    opacity: 0.1;
+    z-index: -1;
+    transition: 0.5s all ease;
+}
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-right .twm-nav-post-a-job i {
+    padding-right: 5px;
+}
+
+
+.header-style-3 .header-nav-btn-section .twm-nav-btn-right .twm-nav-post-a-job:hover:before {
+    width: 100%;
+    right: 0%;
+    opacity: 1;
+}
+
+.header-style-3 .header-search a.header-search-icon {
+    color: #1967d2;
+    width: 54px;
+    height: 54px;
+    line-height: 54px;
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 550;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.header-style-3 .extra-nav {
+    /*---Extra Nav---*/
+    display: table;
+    float: right;
+    height: 70px;
+    position: relative;
+    z-index: 13;
+}
+
+.header-style-3 .extra-nav .extra-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.header-style-3 .extra-nav .extra-cell:first-child {
+    padding-left: 0px;
+}
+
+.extra-cell .font-icon-contact {
+    font-size: 20px;
+}
+
+.header-style-3 .logo-header {
+    /*--logo for header---*/
+    display: table;
+    float: left;
+    width: 190px;
+    height: 70px;
+    vertical-align: middle;
+    padding: 0px;
+    font-size: 36px;
+    color: #000;
+    margin: 0px;
+    position: relative;
+    z-index: 11;
+}
+
+.header-style-3 .logo-header .logo-header-inner {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.header-style-3 .logo-header .logo-header-inner img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.header-style-3.site-header {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 999;
+}
+
+.header-style-3.site-header ul,
+.header-style-3.site-header ol {
+    margin-bottom: 0px;
+}
+
+.header-style-3 .main-bar {
+    /*--main-bar--*/
+    position: relative;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: transparent;
+    max-width: 1170px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.header-style-3 .main-bar .container,
+.header-style-3 .main-bar .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.header-style-3 .main-bar:after,
+.header-style-3 .main-bar:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.header-style-3 .navbar-toggler {
+    /*--Navbar Toggler---*/
+    border: none;
+    margin: 24px 0px 24px 15px;
+    padding: 12px 10px;
+}
+
+
+.header-style-3 .navbar-toggler:focus {
+    box-shadow: none !important;
+}
+
+
+.header-style-3 .navbar-toggler .icon-bar {
+    background: #1967d2;
+    height: 3px;
+    border-radius: 0px;
+    display: block;
+    width: 22px;
+}
+
+.header-style-3 .navbar-toggler .icon-bar+.icon-bar {
+    margin-top: 4px;
+}
+
+
+
+.header-style-3 .is-fixed.mobile-sider-drawer-menu .header-nav .nav {
+    height: 100vh !important;
+    width: 100%;
+}
+
+.header-style-3 .is-fixed.mobile-sider-drawer-menu .header-nav .nav>li>a {
+    padding: 12px 15px !important;
+}
+
+.header-style-3 .header-nav {
+    position: relative;
+    padding: 0px;
+    z-index: 10;
+
+    /*-- Submenu direction---*/
+}
+
+.header-style-3 .header-nav .nav {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: inherit;
+}
+
+
+.header-style-3 .header-nav .nav li i {
+    font-size: 9px;
+    margin-left: 3px;
+    margin-top: -3px;
+    vertical-align: middle;
+    opacity: 0.7;
+}
+
+
+.header-style-3 .header-nav .nav>li>a {
+    color: #2f2f2f;
+    font-size: 16px;
+    padding: 15px 16px;
+    cursor: pointer;
+    margin: 0px 0px;
+    font-weight: 550;
+    display: block;
+    text-decoration: none;
+    border-radius: 16px;
+    transition: 0.3s;
+}
+
+
+.header-style-3 .header-nav .nav>li>a:hover {
+    background-color: #e0eeff;
+    color: #1967d2;
+}
+
+.header-style-3 .header-nav .nav>li>a:active,
+.header-style-3 .header-nav .nav>li>a:focus {
+    background-color: transparent;
+}
+
+.header-style-3 .header-nav .nav>li.active>a,
+.header-style-3 .header-nav .nav>li.current-menu-item>a {
+    background-color: transparent;
+    color: #000;
+}
+
+.header-style-3 .header-nav .nav>li:hover>a {
+    color: #1967d2;
+}
+
+.header-style-3 .header-nav .nav>li:hover>.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0px;
+    transition: all 0.3s ease;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu1 {
+    background-color: #fff;
+    display: block;
+    left: 0px;
+    top: 100%;
+    list-style: none;
+    margin: 20px 0 0;
+    opacity: 0;
+    padding: 0px;
+    position: absolute;
+    visibility: hidden;
+    width: 220px;
+    z-index: 10;
+    max-height: 100%;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu2 {
+    background-color: #fff;
+    display: block;
+    left: 100%;
+    top: 0;
+    /* Changed from top: 0 to always start from top */
+    list-style: none;
+    margin: 0;
+    opacity: 0;
+    padding: 0px;
+    position: absolute;
+    visibility: hidden;
+    width: 220px;
+    z-index: 10;
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(0);
+    /* Ensure no vertical offset */
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu li {
+    border-bottom: 1px solid #f4f4f4;
+    position: relative;
+    text-transform: none;
+    /* Ensure nested sub-menus can overflow */
+    overflow: visible !important;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu li a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu li a:hover {
+    color: #000;
+    text-decoration: none;
+    background: #f5f5f5;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu li:hover>a {
+    background: #f5f5f5;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu li:last-child {
+    border-bottom: 0px;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu li .fa {
+    color: #000;
+    display: block;
+    float: right;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    z-index: -1;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu li.has-child.nav-active>a {
+    color: #1967d2;
+}
+
+/* FIX FOR NESTED SUB-MENUS - CRITICAL */
+.header-style-3 .header-nav .nav>li .sub-menu li>.sub-menu {
+    left: 220px;
+    margin: 0px 0px 0px 20px;
+    transition: all 0.1s ease;
+    /* Ensure nested menus can overflow the parent scroll container */
+    position: absolute;
+    z-index: 1001;
+    /* Higher z-index to appear above scroll container */
+    max-height: 60vh;
+    /* Slightly smaller for nested menus */
+    overflow-y: auto;
+}
+
+/* Ensure nested sub-menus are not constrained by parent overflow */
+.header-style-3 .header-nav .nav>li .sub-menu li {
+    overflow: visible;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu li.has-child:hover>.sub-menu {
+    left: 220px;
+    margin: 0px;
+    opacity: 1;
+    top: -1px;
+    visibility: visible;
+    /* Ensure it's positioned outside the scroll container */
+    transform: translateY(0);
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu li:hover>.sub-menu:before {
+    background-color: transparent;
+    bottom: 0px;
+    content: "";
+    display: block;
+    height: 100%;
+    left: -6px;
+    position: absolute;
+    top: 0px;
+    width: 6px;
+}
+
+.header-style-3 .header-nav .submenu-direction .sub-menu {
+    left: auto;
+    right: 0px;
+}
+
+.header-style-3 .header-nav .submenu-direction .sub-menu li>.sub-menu {
+    left: auto;
+    right: 220px;
+    margin: 0px 20px 0px 0px;
+}
+
+.header-style-3 .header-nav .submenu-direction .sub-menu li:hover>.sub-menu {
+    left: auto;
+    right: 220px;
+    margin: 0px 0px 0px 0px;
+}
+
+.header-style-3 .header-nav.nav-animation .nav>li>ul.sub-menu li>a {
+    transition: all 0.5s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+
+.header-style-3 .has-child .submenu-toogle {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    color: #000;
+    background-color: transparent;
+    z-index: 900;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+.header-style-3.mobile-sider-drawer-menu .header-nav .close-menu-btn {
+    display: none;
+}
+
+.header-style-3 .has-child li .submenu-toogle {
+    opacity: 0.9;
+}
+
+.header-style-3 .has-child.nav-active>a+.submenu-toogle.glyphicon-chevron-right:before {
+    content: "\e114";
+}
+
+.header-style-3 .has-child.nav-active>a+.submenu-toogle.glyphicon-plus::before {
+    content: "−";
+}
+
+
+.header-style-3 .sticky-no .main-bar {
+    position: static !important;
+}
+
+.header-style-3 .is-fixed .main-bar {
+    position: fixed;
+}
+
+.header-style-3 .is-fixed .main-bar.color-fill {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px rgba(56, 152, 226, 0.3);
+}
+
+.header-style-3 .is-fixed .header-nav .nav>li {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.header-style-3 .header-nav .nav>li {
+    position: relative;
+    /* Ensure proper positioning context */
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu1 {
+    background-color: #fff;
+    display: block;
+    left: 0px;
+    top: 100%;
+    /* Position below the parent menu item */
+    list-style: none;
+    margin: 0;
+    /* Remove the top margin */
+    opacity: 0;
+    padding: 0px;
+    position: absolute;
+    visibility: hidden;
+    width: 220px;
+    z-index: 10;
+    max-height: 100vh;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(10px);
+    /* Slight offset for animation */
+    transition: all 0.3s ease;
+    /* Smooth transition */
+}
+
+/* For nested sub-menus (sub-menu2) */
+.header-style-3 .header-nav .nav>li .sub-menu1 li {
+    position: relative;
+    /* Positioning context for nested menus */
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu1 li .sub-menu2 {
+    position: fixed;
+    top: 0px;
+    /* adjust if you want below header (e.g. top:70px) */
+    left: 220px;
+    width: 260px;
+    background-color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(2px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 9999;
+    min-height: 100%;
+}
+
+.header-style-3 .header-nav .nav>li .sub-menu1 li:hover .sub-menu2 {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+
+
+/* Responsive Styles for Header - Left Side Mobile Menu */
+@media (max-width: 1199px) {
+    .header-style-3 .main-bar .container-fluid {
+        padding: 0 15px;
+    }
+
+    .header-style-3 .header-nav .nav>li>a {
+        padding: 15px 12px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 991px) {
+    .header-style-3 .header-nav.navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 100%;
+        /* Changed from right: -300px */
+        width: 100%;
+        height: 100vh;
+        background: #fff;
+        padding: 70px 20px 30px;
+        overflow-y: auto;
+        transition: all 0.4s ease;
+        z-index: 10000;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        /* Changed shadow direction */
+    }
+
+    .header-style-3 .navbar-toggler {
+        order: 3;
+        /* Move to the end of the flex container */
+        margin-left: auto;
+        /* Push to the right */
+        margin-right: 15px;
+        /* Add some spacing from the edge */
+    }
+
+    .header-style-3 .extra-nav {
+        order: 2;
+        /* Keep nav items in the middle */
+    }
+
+    .header-style-3 .logo-header {
+        order: 1;
+        /* Keep logo on the left */
+    }
+
+    .header-style-3.mobile-sider-drawer-menu.active .header-nav.navbar-collapse {
+        left: 0;
+        /* Changed from right: 0 */
+    }
+
+    .header-style-3 .header-nav .nav {
+        flex-direction: column;
+    }
+
+    .header-style-3 .header-nav .nav>li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .header-style-3 .header-nav .nav>li>a {
+        padding: 12px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header-style-3 .has-child>a::after {
+        content: '+';
+        font-size: 18px;
+    }
+
+    .header-style-3 .has-child.nav-active>a::after {
+        content: '-';
+    }
+
+    .header-style-3 .header-nav .sub-menu,
+    .header-style-3 .header-nav .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        width: 100%;
+        margin: 0;
+        padding-left: 15px;
+        box-shadow: none;
+        display: none;
+        transition: none;
+    }
+
+    .header-style-3 .has-child.nav-active>.sub-menu,
+    .header-style-3 .has-child.nav-active>.dropdown-menu {
+        display: block;
+    }
+
+
+    .header-style-3 .header-nav .nav>li .sub-menu1,
+    .header-style-3 .header-nav .nav>li .sub-menu2 {
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding-left: 15px;
+        box-shadow: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-5px);
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        overflow-y: auto;
+    }
+
+    /* Show on hover (for mobile AND desktop) */
+    .header-style-3 .header-nav .nav>li:hover>.sub-menu1,
+    .header-style-3 .header-nav .nav>li .sub-menu1 li:hover>.sub-menu2 {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        max-height: 500px;
+    }
+
+    /* Show on nav-active (for tap/click on mobile) */
+    .header-style-3 .has-child.nav-active>.sub-menu1,
+    .header-style-3 .has-child.nav-active>.sub-menu2 {
+        opacity: 1;
+        visibility: visible;
+        max-height: 500px;
+    }
+
+    .header-style-3 .header-nav .sub-menu li>a,
+    .header-style-3 .header-nav .dropdown-menu li>a {
+        padding: 10px 0;
+    }
+
+    .header-style-3 .header-nav .sub-menu li {
+        border-bottom: none;
+    }
+
+    .header-style-3 .header-nav .close-menu-btn {
+        display: block !important;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        /* Keep on right side for easier access */
+        background: none;
+        border: none;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 10001;
+        color: #1967d2;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-style-3 .header-nav .close-menu-btn:hover {
+        background-color: #f0f6fe;
+    }
+
+    .header-style-3 .extra-nav {
+        margin-left: auto;
+        padding-right: 50px;
+    }
+
+    .header-style-3 .header-nav-btn-section {
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 10px;
+    }
+
+    .header-style-3 .header-nav-btn-section .twm-nav-btn-left,
+    .header-style-3 .header-nav-btn-section .twm-nav-btn-right {
+        margin: 5px 0;
+    }
+
+    .twm-nav-sign-up a {
+        display: none;
+    }
+
+    .twm-nav-btn-right span {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-style-3 .logo-header {
+        width: 150px;
+    }
+
+    .header-style-3 .extra-nav {
+        padding-right: 40px;
+    }
+
+    .header-style-3 .header-search a.header-search-icon {
+        width: 44px;
+        height: 44px;
+        line-height: 44px;
+        font-size: 20px;
+    }
+
+    .header-style-3 .navbar-toggler {
+        margin: 18px 0 18px 10px;
+    }
+
+
+    .header-style-3 .header-nav-btn-section .twm-nav-btn-left .twm-nav-sign-up,
+    .header-style-3 .header-nav-btn-section .twm-nav-btn-right .twm-nav-post-a-job {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 575px) {
+    .header-style-3 .main-bar {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .header-style-3 .logo-header {
+        width: 130px;
+        height: 60px;
+    }
+
+    .header-style-3 .navbar-toggler {
+        margin-right: 10px;
+        /* Reduce spacing on smaller screens */
+    }
+
+    /* Hide text in buttons to save space */
+    .twm-nav-sign-up a {
+        display: none;
+    }
+
+    .twm-nav-btn-right span {
+        display: none;
+    }
+
+    .header-style-3 .extra-nav {
+        height: 60px;
+    }
+
+    .header-style-3 .header-nav-btn-section {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .header-style-3 .header-nav-btn-section .twm-nav-btn-left,
+    .header-style-3 .header-nav-btn-section .twm-nav-btn-right {
+        margin: 2px;
+    }
+
+    .header-style-3 .header-nav-btn-section .twm-nav-btn-left .twm-nav-sign-up,
+    .header-style-3 .header-nav-btn-section .twm-nav-btn-right .twm-nav-post-a-job {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .header-style-3 .header-search a.header-search-icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 18px;
+    }
+
+    .header-style-3 .navbar-toggler {
+        margin: 15px 0 15px 5px;
+        padding: 8px 6px;
+    }
+
+    .header-style-3 .navbar-toggler .icon-bar {
+        width: 18px;
+    }
+
+    .header-style-3 .header-nav.navbar-collapse {
+        /* width: 100%; */
+        left: -100%;
+        /* Changed from right: -100% */
+    }
+}
+
+/* Mobile menu overlay */
+@media (max-width: 991px) {
+    .mobile-sider-drawer-menu::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+    }
+
+    .header-style-3 .header-nav .nav>li.dropdown .dropdown-menu {
+        display: none;
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+        transform: none;
+        padding-left: 15px;
+    }
+
+    .header-style-3 .header-nav .nav>li.dropdown.nav-active .dropdown-menu {
+        display: block;
+    }
+}
+
+/* Prevent body scroll when menu is open */
+body.mobile-menu-open {
+    overflow: hidden;
+}
+
+@media (max-width: 991px) {
+    .header-style-3 .header-nav .nav>li .sub-menu1 li .sub-menu2 {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        min-height: auto;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: none;
+        /* hidden by default */
+        padding-left: 15px;
+
+        /* Optional smooth slide-down animation */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .header-style-3 .header-nav .nav>li .sub-menu1 li.nav-active>.sub-menu2 {
+        display: block;
+        max-height: 500px;
+        /* big enough for your content */
+    }
+}

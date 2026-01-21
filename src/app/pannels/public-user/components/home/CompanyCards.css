@@ -1,0 +1,76 @@
+/* CompanyCards.css */
+.scrolling-logos-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+
+.scrolling-logos {
+    display: flex;
+    width: max-content;
+    animation: scroll 200s linear infinite;
+    /* Very slow scrolling */
+}
+
+.scrolling-logos:hover {
+    animation-play-state: paused;
+}
+
+.logo-item {
+    flex: 0 0 auto;
+    margin: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client-logo-media {
+    width: 190px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.client-logo-media img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    /* filter: grayscale(100%); */
+    transition: all 0.3s ease;
+}
+
+.client-logo-media:hover img {
+    /* filter: grayscale(0%); */
+    transform: scale(1.05);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+        /* Travel full width instead of half */
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logo-item {
+        margin: 0 15px;
+    }
+
+    .client-logo-media {
+        width: 100px;
+        height: 60px;
+    }
+
+    .scrolling-logos {
+        animation: scroll 120s linear infinite;
+        /* Slow on mobile too */
+    }
+}
