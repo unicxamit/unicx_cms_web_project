@@ -32,15 +32,36 @@ export const createSubCategory = async (req, res) => {
     res.status(500).json({ status: false, message: "Server error" });
   }
 };
+// export const getAllSubCategories = async (req, res) => {
+//   try {
+//     const subCategories = await SubCategory.find()
+//       .populate("category", "name")
+//       .sort({ order_index: 1 });
+
+//     res.status(200).json({
+//       status: true,
+//       message: "SubCategories fetched successfully",
+//       subCategories,
+//     });
+//   } catch (error) {
+//     console.error("Get All Error:", error);
+//     res.status(500).json({ status: false, message: "Server error" });
+//   }
+// };
+
 export const getAllSubCategories = async (req, res) => {
   try {
-    const subCategories = await SubCategory.find()
-      .populate("category", "name")
-      .sort({ order_index: 1 });
+    const [subCategories, totalSubCategory] = await Promise.all([
+      SubCategory.find()
+        .populate("category", "name")
+        .sort({ order_index: 1 }),
+      SubCategory.countDocuments()
+    ]);
 
     res.status(200).json({
       status: true,
       message: "SubCategories fetched successfully",
+      totalSubCategory,
       subCategories,
     });
   } catch (error) {

@@ -86,7 +86,7 @@ function BlogGrid2Page() {
                                                     <div className="wt-post-meta">
                                                         <ul>
                                                             <li className="post-date">
-                                                                {new Date(blog.created_at).toLocaleDateString("en-US", {
+                                                                {new Date(blog.createdAt).toLocaleDateString("en-US", {
                                                                     year: "numeric",
                                                                     month: "long",
                                                                     day: "numeric",

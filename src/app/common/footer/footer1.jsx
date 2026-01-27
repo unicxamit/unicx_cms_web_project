@@ -76,8 +76,9 @@ function Footer1() {
                                             <ul>
                                                 <li><NavLink to={publicUser.pages.LOGIN}>User Dashboard</NavLink></li>
                                                 <li><NavLink to={publicUser.candidate.GRID}>Candidates</NavLink></li>
-                                                <li><NavLink to={publicUser.blog.LIST}>Blog List</NavLink></li>
-                                                <li><NavLink to={publicUser.blog.DETAIL}>Blog single</NavLink></li>
+                                                {/* <li><NavLink to={publicUser.blog.LIST}>Blog List</NavLink></li> */}
+                                                <li><NavLink to={publicUser.pages.TestPage5}>Blog List</NavLink></li>
+                                                <li><NavLink to={publicUser.blog.DETAILs}>Blog single</NavLink></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -87,8 +88,8 @@ function Footer1() {
                                             <ul>
                                                 <li><NavLink to={publicUser.blog.GRID1}>Blog Grid</NavLink></li>
                                                 <li><NavLink to={publicUser.pages.CONTACT}>Contact</NavLink></li>
-                                                <li><NavLink to={publicUser.jobs.LIST}>Listing</NavLink></li>
-                                                <li><NavLink to={publicUser.jobs.DETAIL1}>details</NavLink></li>
+                                                <li><NavLink to={publicUser.jobs.LIST}>CaseStudy Grid</NavLink></li>
+                                                {/* <li><NavLink to={publicUser.jobs.DETAIL1}>details</NavLink></li> */}
                                             </ul>
                                         </div>
                                     </div>
@@ -110,8 +111,8 @@ function Footer1() {
                                                 <li><NavLink to={publicUser.HOME1}>Home</NavLink></li>
                                                 <li><NavLink to={publicUser.pages.ABOUT}>About us</NavLink></li>
                                                 {/* <li><NavLink to={publicUser.jobs.GRID}>Jobs</NavLink></li> */}
-                                                <li><NavLink to={publicUser.employer.LIST}>Employer</NavLink></li>
-                                                <li><NavLink to={publicUser.pages.CHARTS1}>second</NavLink></li>
+                                                {/* <li><NavLink to={publicUser.employer.LIST}>Employer</NavLink></li>
+                                                <li><NavLink to={publicUser.pages.CHARTS1}>second</NavLink></li> */}
                                             </ul>
                                         </div>
                                     </div>

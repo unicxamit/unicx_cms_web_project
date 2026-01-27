@@ -151,7 +151,7 @@ console.log(allCaseStudies,"all casestudy")
                                                 <div className="wt-post-meta">
                                                     <ul>
                                                         <li className="post-date">
-                                                            {new Date(cs.created_at).toLocaleDateString(
+                                                            {new Date(cs.createdAt).toLocaleDateString(
                                                                 "en-US",
                                                                 {
                                                                     year: "numeric",
@@ -176,7 +176,7 @@ console.log(allCaseStudies,"all casestudy")
                                                     </h4>
                                                 </div>
                                                 <div className="wt-post-text">
-                                                    <p>{cs.excerpt || "No description available."}</p>
+                                                    <p>{cs.Description || "No description available."}</p>
                                                 </div>
                                                 <div className="wt-post-readmore">
                                                     <NavLink

@@ -239,29 +239,31 @@ const filteredCategories = categories?.filter(cat =>
 
   return (
   <div className="category-container ">
-  <div className="container-wrapper">
-    <h3 className="heading_category">Category Management</h3>
+  <div style={{width:"1300px",margin:"0 auto"}}>
+    <h3 className="heading_category"style={{marginBottom:"3rem",marginTop:"1rem"}}>Category Management</h3>
 
-    <div className="d-flex justify-content-between custom_heading">
+    <div className="d-flex justify-content-between custom_headings"style={{marginBottom:"3rem"}}>
 
       <input
         type="text"
-        className="form-control w-25"
+        className="form-control w-25"style={{height:"40px"}}
         placeholder="Search category / service..."
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
       />
 
-      <div onClick={openCreateModal} className="mb-3 create_button">
+      {/* <div onClick={openCreateModal} className="mb-3 create_button">
         Add
-      </div>
-
+      </div> */}
+<div  className="mb-3 create_buttons" onClick={openCreateModal}>
+            Add
+          </div>
     </div>
 
-    <hr style={{ width: "100%", color: "#817d7dff" }} />
+    {/* <hr style={{ width: "100%", color: "rgb(177, 176, 176)",marginBottom:"3rem" }} /> */}
 
 <table className="table table-bordered table-striped custom-table">
-  <thead className="table-primary">
+  <thead className="table-primary" >
     <tr>
       <th>
         <input

@@ -4,72 +4,88 @@ import { loadScript } from "../../../../../globals/constants";
 import { publicUser } from "../../../../../globals/route-names";
 import JobZImage from "../../../../common/jobz-img";
 import SectionBlogsSidebar2 from "../../sections/blogs/sidebar/section-blogs-sidebar2";
-import { getBlogById } from "../../../../../api"; // Import getBlogById instead of getCaseStudyById
+import { getBlogs } from "../../../../../adminApi";
+
 
 function BlogDetailsPage() {
-    const { id } = useParams(); // Get the ID from the URL parameters
-    const [blogDetail, setBlogDetail] = useState(null); // State to store the single blog detail
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    
 
-    // Define BASE_URL here for consistency, or import if it's a global constant
-    const BASE_URL = 'https://unicx.in';
+const [blogs, setBlogs] = useState([]);      // ✅ all blogs
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        loadScript("js/custom.js");
+//   const BASE_URL = "https://unicx.in";
 
-        // Fetch single blog by ID
-        const fetchBlogDetail = async () => {
-            try {
-                const data = await getBlogById(id); // Call getBlogById
-                setBlogDetail(data);
-                console.log("Fetched Blog Detail:", data); // Log the data to console
-            } catch (err) {
-                console.error("Error fetching blog detail:", err);
-                setError("Failed to load blog. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    loadScript("js/custom.js");
 
-        if (id) {
-            fetchBlogDetail();
-        } else {
-            setLoading(false);
-            setError("No blog ID provided in the URL.");
-        }
-    }, [id]); // Re-run effect if ID changes
+    const fetchBlogs = async () => {
+      try {
+        const data = await getBlogs();
 
-    if (loading) {
-        return (
-            <div className="section-full p-t120 p-b90 bg-white text-center">
-                <div className="container">
-                    Loading blog...
-                </div>
-            </div>
+        // latest first
+        const sortedBlogs = [...data.blogs].sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
-    }
 
-    if (error) {
-        return (
-            <div className="section-full p-t120 p-b90 bg-white text-center">
-                <div className="container">
-                    {error}
-                </div>
-            </div>
-        );
-    }
+        setBlogs(sortedBlogs);
+        setCurrentIndex(0);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load blogs.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    if (!blogDetail) {
-        return (
-            <div className="section-full p-t120 p-b90 bg-white text-center">
-                <div className="container">
-                    Blog not found.
-                </div>
-            </div>
-        );
-    }
+    fetchBlogs();
+  }, []);
 
+  // ✅ current blog (NO reassignment)
+  const currentBlog = blogs[currentIndex];
+
+  // Navigation handlers
+  const handleNext = () => {
+    if (currentIndex < blogs.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(prev => prev - 1);
+    }
+  };
+
+  const isPrevDisabled = currentIndex === 0;
+  const isNextDisabled = currentIndex === blogs.length - 1;
+
+  // ================= UI STATES =================
+
+  if (loading) {
+    return (
+      <div className="section-full p-t120 p-b90 bg-white text-center">
+        <div className="container">Loading blog...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="section-full p-t120 p-b90 bg-white text-center">
+        <div className="container">{error}</div>
+      </div>
+    );
+  }
+
+  if (!currentBlog) {
+    return (
+      <div className="section-full p-t120 p-b90 bg-white text-center">
+        <div className="container">Blog not found.</div>
+      </div>
+    );
+  }
     return (
         <>
             <div className="section-full p-t120 p-b90 bg-white">
@@ -85,33 +101,33 @@ function BlogDetailsPage() {
                                             <div className="wt-post-media m-b30">
                                                 <img
                                                     src={
-                                                        blogDetail.image_url
-                                                            ? `${BASE_URL}${blogDetail.image_url}` // Use BASE_URL for image
-                                                            : `${BASE_URL}/images/blog/blog-single/1.jpg` // Placeholder if no image
+                                                        currentBlog.images
+                                                            // ? blogDetail.images // Use BASE_URL for image
+                                                            // : `${BASE_URL}/images/blog/blog-single/1.jpg` // Placeholder if no image
                                                     }
-                                                    alt={blogDetail.title}
+                                                    alt={currentBlog.title}
                                                 />
                                             </div>
                                             <div className="wt-post-title ">
                                                 <div className="wt-post-meta-list">
                                                     <div className="wt-list-content post-date">
-                                                        {new Date(blogDetail.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                                        {new Date(currentBlog.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                                                     </div>
                                                     <div className="wt-list-content post-author">
-                                                        By {blogDetail.author || "Unicx Team"} {/* Assuming blogDetail might have an author, otherwise default */}
+                                                        By {currentBlog.author || "Unicx Team"} {/* Assuming blogDetail might have an author, otherwise default */}
                                                     </div>
                                                 </div>
-                                                <h3 className="post-title">{blogDetail.title}</h3>
+                                                <h3 className="post-title">{currentBlog.title}</h3>
                                             </div>
                                             {/* Display short_description if available, otherwise content */}
-                                            {blogDetail.short_description && (
-                                                <div className="wt-post-discription" dangerouslySetInnerHTML={{ __html: blogDetail.short_description }} />
+                                            {currentBlog.short_description && (
+                                                <div className="wt-post-discription" dangerouslySetInnerHTML={{ __html: currentBlog.short_description }} />
                                             )}
                                             {/* Display full content */}
-                                            {blogDetail.content && (
+                                            {currentBlog.content && (
                                                 <div className="wt-post-discription m-t30">
                                                     <h4 className="twm-blog-s-title">Full Content</h4>
-                                                    <div dangerouslySetInnerHTML={{ __html: blogDetail.content }} />
+                                                    <div dangerouslySetInnerHTML={{ __html: currentBlog.content }} />
                                                 </div>
                                             )}
 
@@ -126,13 +142,13 @@ function BlogDetailsPage() {
                                                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                                     </p>
                                                     {/* Dynamically set author name here as well */}
-                                                    <strong>{blogDetail.author || "Rosalina William"}</strong>
+                                                    <strong>{currentBlog.author || "Rosalina William"}</strong>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="post-navigation m-t30">
+                                    {/* <div className="post-navigation m-t30">
                                         <div className="post-nav-links">
                                             <div className="post-nav-item nav-post-prev">
                                                 <div className="nav-post-arrow">
@@ -157,7 +173,51 @@ function BlogDetailsPage() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
+                                    <div className="post-navigation m-t30">
+  <div className="post-nav-links">
+
+    {/* PREVIOUS */}
+    <div className={`post-nav-item nav-post-prev ${isPrevDisabled ? "disabled" : ""}`}>
+      <div className="nav-post-arrow">
+        <button
+          onClick={handlePrevious}
+          disabled={isPrevDisabled}
+          className="btn btn-link"
+        >
+          <i className="fa fa-angle-left" />
+        </button>
+      </div>
+
+      {!isPrevDisabled && (
+        <div className="nav-post-meta">
+          <span>{blogs[currentIndex - 1]?.title}</span>
+        </div>
+      )}
+    </div>
+
+    {/* NEXT */}
+    <div className={`post-nav-item nav-post-next ${isNextDisabled ? "disabled" : ""}`}>
+      <div className="nav-post-arrow">
+        <button
+          onClick={handleNext}
+          disabled={isNextDisabled}
+          className="btn btn-link"
+        >
+          <i className="fa fa-angle-right" />
+        </button>
+      </div>
+
+      {!isNextDisabled && (
+        <div className="nav-post-meta">
+          <span>{blogs[currentIndex + 1]?.title}</span>
+        </div>
+      )}
+    </div>
+
+  </div>
+</div>
+
                                     <div className="clear" id="comment-list">
                                         <div className="comments-area" id="comments">
                                             <h3 className="section-head-small mb-4">Comments</h3>

@@ -84,7 +84,7 @@ function SidebarCaseStudy() {
                                     <div className="wt-post-info">
                                         <div className="wt-post-header">
                                             <span className="post-date">
-                                                {new Date(blog.created_at).toLocaleDateString("en-US", {
+                                                {new Date(blog.createdAt).toLocaleDateString("en-US", {
                                                     year: "numeric",
                                                     month: "long",
                                                     day: "numeric",

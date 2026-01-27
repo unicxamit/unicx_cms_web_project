@@ -398,13 +398,13 @@ const handleToggleStatus = async (id) => {
 
   return (
     <div className="category-container">
-      <div className="container-wrapper">
-      <h3 className="heading_category">Service Management</h3>
-<div className="d-flex justify-content-between custom_heading " style={{columnGap:"1rem"}}>
+      <div style={{width:"1300px",margin:"0 auto"}}>
+      <h3 className="heading_category"style={{marginBottom:"3rem",marginTop:"1rem"}}>Service Management</h3>
+<div className="d-flex justify-content-between custom_headings " style={{columnGap:"1rem"}}>
  <input
       type="text"
       className="form-control "
-      style={{width:"250px"}}
+      style={{width:"250px",height:"40px"}}
       placeholder="Search category / service..."
       value={searchText}
       onChange={(e) => setSearchText(e.target.value)}
@@ -447,7 +447,9 @@ value={filterCategory}
   {/* Status Filter */}
   <select
     className="form-select"
-    style={{width:"250px"}}
+    style={{width:"250px",height:
+      "40px"
+    }}
     value={filterStatus}
     onChange={(e) => setFilterStatus(e.target.value)}
   >
@@ -456,9 +458,12 @@ value={filterCategory}
     <option value="inactive">Inactive</option>
   </select>
 
-  <div className="mb-3 create_button" onClick={openCreateModal}>
+  {/* <div className="mb-3 create_button" onClick={openCreateModal}>
     Add 
-  </div>
+  </div> */}
+  <div  className="mb-3 create_buttons"onClick={openCreateModal}>
+          Add
+          </div>
 </div>
       {/* Table */}
      <table className="table table-bordered table-striped custom-table mt-5">

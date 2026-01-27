@@ -272,7 +272,8 @@ export const deleteSubCategory = async (id) => {
 // Users API
 export const getUsers = async () => {
   try {
-    const response = await api.get("/users");
+    const response = await api.get("/auth/find-all");
+  
     return response.data;
   } catch (error) {
     console.error("API Error fetching users:", error);
@@ -284,7 +285,7 @@ export const getUsers = async () => {
 export const getSubSubCategories = async () => {
   try {
     const response = await api.get("/service/getAllServices");
-    // console.log(response, "category response data");
+    // console.log(response, "category servuce response data");
     return response.data;
   } catch (error) {
     console.error("API Error fetching sub-sub-categories:", error);
@@ -409,7 +410,7 @@ export const addCaseStudy = async (data) => {
 export const getCaseStudies = async () => {
   try {
     const response = await api.get("/casestudy/getAllcasestudy");
-    // console.log(response, "casestudy studydata");
+    console.log(response, "casestudy studydata");
     return response.data;
   } catch (error) {
     console.error("API Error fetching case studies:", error);

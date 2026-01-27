@@ -119,6 +119,7 @@ const [newCategoryName, setNewCategoryName] = useState("");
   // ================= CREATE FAQ =================
 
   const handleCreate = async () => {
+  
     if (!formData.question?.trim()) return alert("Faq question required");
     if (!formData.answer?.trim()) return alert("Faq answer required");
     if (!formData.category?.trim()) return alert("Faq category required");
@@ -138,6 +139,7 @@ const [newCategoryName, setNewCategoryName] = useState("");
   // ================= UPDATE FAQ =================
 
   const handleUpdate = async () => {
+ 
     if (!formData.question?.trim()) return alert("Faq question required");
     if (!formData.answer?.trim()) return alert("Faq answer required");
 
@@ -187,6 +189,15 @@ const handleToggleStatus = async (id) => {
   }
 };
 
+const handleSubmit = (e) => {
+  e.preventDefault(); // 🔥 prevents page reload
+
+  if (isEdit) {
+    handleUpdate();
+  } else {
+    handleCreate();
+  }
+};
 
 
   // ================= MODAL OPEN =================
@@ -234,16 +245,40 @@ const handleToggleStatus = async (id) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const filteredFaqs = blogs.filter((faq) => {
+  const search = searchText.toLowerCase();
+
+  const matchesText =
+    faq.question?.toLowerCase().includes(search) ||
+    faq.answer?.toLowerCase().includes(search) ||
+    faq.category?.name?.toLowerCase().includes(search);
+
+  const matchesStatus =
+    selectedStatus === "all" || faq.status === selectedStatus;
+
+  return matchesText && matchesStatus;
+});
+
+  
+    // useEffect(() => {
+    //   if (modalShow) {
+    //     setTimeout(() => {
+    //       inputRef.current?.focus();
+    //     }, 0);
+    //   }
+    // }, [modalShow]);
+ 
   return (
     <div className="category-container">
-      <div className="container-wrapper">
-      <h3 className="heading_category">Faq Management</h3>
+      <div style={{width:"1300px",margin:"0 auto"}}>
+      <h3 className="heading_category"style={{marginBottom:"3rem",marginTop:"1rem",marginLeft:"1rem"}}>Faq Management</h3>
 
-      <div className="d-flex justify-content-between custom_heading mx-3">
+      <div className="d-flex justify-content-between custom_headings mx-3"style={{maringBottom:"3rem"}}>
         
           <input
             type="text"
-            className="form-control w-25"
+            className="form-control w-25"style={{height:"40px"}}
             placeholder="Search faq..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -282,9 +317,12 @@ const handleToggleStatus = async (id) => {
         
       
 
-      <div  onClick={openCreateModal} className="mb-3 create_buttons" style={{cursor:"pointer",border:"1px solid blue",borderRadius:"0.2rem",width:"60px",height:"20px",padding:"0 0.5rem"}}>
+      {/* <div  onClick={openCreateModal} className="mb-3 create_buttons" style={{cursor:"pointer",border:"1px solid blue",borderRadius:"0.2rem",width:"60px",height:"20px",padding:"0 0.5rem"}}>
         Add
-      </div>
+      </div> */}
+      <div  className="mb-3 create_buttons"onClick={openCreateModal}>
+            Add
+          </div>
 </div>
       <table className="table table-bordered table-striped custom-table mt-5">
         <thead className="table-primary">
@@ -303,7 +341,7 @@ const handleToggleStatus = async (id) => {
           {loading ? (
             <Loader/>
           ):(
-          blogs.map((faq, index) => {
+         filteredFaqs.map((faq, index) => {
            
   const categoryName = faq?.category?.[0]?.name || "-";
             return (
@@ -343,7 +381,7 @@ const handleToggleStatus = async (id) => {
             );
           })
         )}
-          {blogs.length === 0 && (
+          {filteredFaqs.length === 0 && (
             <tr>
               <td colSpan="6" className="text-center">
                 No FAQ found.
@@ -357,13 +395,22 @@ const handleToggleStatus = async (id) => {
        show={modalShow}
   onHide={() => setModalShow(false)}
   centered
-  dialogClassName="modal-custom">
+  dialogClassName="modal-custom"
+    >
+    <Form onSubmit={handleSubmit} onKeyDown={(e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    handleSubmit(e);
+  }
+}}>
+
+
         <Modal.Header closeButton>
           <Modal.Title>{isEdit ? "Edit FAQ" : "Create FAQ"}</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
-          {/* CATEGORY FIELD */}
+        <Modal.Body >
+      
           <div className="position-relative "style={{marginTop:"1rem", marginBottom:"2rem"}} ref={dropdownRef}>
             <div className="d-flex gap-2">
               <button
@@ -436,15 +483,8 @@ const handleToggleStatus = async (id) => {
             </div>
           )}
 
-          {/* QUESTION */}
-          {/* <input
-            className="form-control"style={{ marginBottom:"2rem"}}
-            name="question"
-            placeholder="FAQ Question"
-            value={formData.question}
-            onChange={handleChange}
-          /> */}
-   <Form>
+        
+   
           <Form.Control
             as="textarea"
             rows={3}
@@ -464,17 +504,7 @@ const handleToggleStatus = async (id) => {
             onChange={handleChange}
             className="mt-3 mb-3"
           />
-    </Form>
-          {/* ANSWER */}
-          {/* <input
-            className="form-control "style={{ marginBottom:"2rem"}}
-            name="answer"
-            placeholder="FAQ Answer"
-            value={formData.answer}
-            onChange={handleChange}
-          /> */}
-
-          {/* STATUS */}
+            
           <select
             className="form-select"style={{ marginBottom:"2rem"}}
 
@@ -492,7 +522,7 @@ const handleToggleStatus = async (id) => {
             Close
           </Button>
 
-          {isEdit ? (
+           {/* {isEdit ? (
             <Button className="edit_modal" onClick={handleUpdate}>
               Update
             </Button>
@@ -500,9 +530,23 @@ const handleToggleStatus = async (id) => {
             <Button variant="primary" onClick={handleCreate}>
               Create
             </Button>
-          )}
+          )}  */}
+          {isEdit ? (
+  <Button className="edit_modal" type="submit">
+    Update
+  </Button>
+) : (
+  <Button variant="primary" type="submit">
+    Create
+  </Button>
+)}
+            
         </Modal.Footer>
+    </Form>
       </Modal>
+
+     
+
     </div>
     </div>
   );

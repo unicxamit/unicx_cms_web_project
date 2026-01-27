@@ -994,7 +994,7 @@ const ServiceDetailsPage = () => {
 
 
 const location = useLocation();
-
+console.log(location,"locatin data")
 const [serviceCategory, setServiceCategory] = useState("");
 const [serviceSubcategory, setServiceSubcategory] = useState("");
 const [name, setName] = useState("");

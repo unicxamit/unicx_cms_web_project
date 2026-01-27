@@ -159,10 +159,10 @@ function PublicUserRoutes() {
             <Route path={publicUser.candidate.DETAIL1} element={<CandidateDetail1Page />} />
             <Route path={publicUser.candidate.DETAIL2} element={<CandidateDetail2Page />} />
             <Route path={publicUser.blog.GRID1} element={<BlogGrid1Page />} />
-            <Route path={publicUser.blog.GRID2} element={<BlogGrid2Page />} />
-            <Route path={publicUser.blog.GRID3} element={<BlogGrid3Page />} />
+            {/* <Route path={publicUser.blog.GRID2} element={<BlogGrid2Page />} /> */}
+            {/* <Route path={publicUser.blog.GRID3} element={<BlogGrid3Page />} /> */}
             <Route path={publicUser.blog.LIST} element={<BlogListPage />} />
-            <Route path={publicUser.blog.DETAIL} element={<BlogDetailPage />} />
+            <Route path={publicUser.blog.DETAILs} element={<BlogDetailsPage />} />
             <Route path={publicUser.blog.DETAIL + "/:id"} element={<BlogDetailPage />} />
 
             <Route path={publicUser.caseStudy.LIST} element={<CaseStudyListPage />} />

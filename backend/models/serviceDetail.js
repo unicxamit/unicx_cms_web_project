@@ -63,8 +63,8 @@ subcategory:{
             type: String, 
           },
         ],
-        createdAt: Date,
-updatedAt: Date
+//         createdAt: Date,
+// updatedAt: Date
 
   },
   

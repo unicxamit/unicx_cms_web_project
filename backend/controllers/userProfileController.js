@@ -199,20 +199,38 @@ console.log(userId,"userId")
 
 // get all user 
 
-export const getUserDetails=async(req,res,next)=>{
-  try{
-      const user= await userModel.find();
-      res.status(201).json({
-        status:true,
-        message:"get all user",
-        user,
-      })
-  }catch(error){
-    console.log(error,"user error")
-    next()
-  }
-}
+// export const getUserDetails=async(req,res,next)=>{
+//   try{
+//       const user= await userModel.find();
+//       res.status(201).json({
+//         status:true,
+//         message:"get all user",
+//         user,
+//       })
+//   }catch(error){
+//     console.log(error,"user error")
+//     next()
+//   }
+// }
 
+export const getUserDetails = async (req, res, next) => {
+  try {
+    const [users, totalUsers] = await Promise.all([
+      userModel.find().select("-password"),
+      userModel.countDocuments()
+    ]);
+
+    res.status(200).json({
+      status: true,
+      message: "Get all users",
+      totalUsers,
+      users,
+    });
+  } catch (error) {
+    console.log("User error:", error);
+    next(error);
+  }
+};
 
 // forgot password by a otp 
 export const forgotPasswordByAOtp=async(req,res,next)=>{

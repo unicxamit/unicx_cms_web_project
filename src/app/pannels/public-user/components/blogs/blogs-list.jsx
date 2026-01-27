@@ -66,8 +66,8 @@ function BlogListPage() {
             if (tagFilter) {
                 currentBlogs = currentBlogs.filter(
                     (blog) =>
-                        blog.tags &&
-                        blog.tags
+                        blog.tage &&
+                        blog.tage
                             .split(",")
                             .some(
                                 (tag) => tag.trim().toLowerCase() === tagFilter.toLowerCase()
@@ -148,7 +148,7 @@ function BlogListPage() {
                                                     <ul>
                                                         <li className="post-date">
                                                             {new Date(
-                                                                blog.created_at
+                                                                blog.createdAt
                                                             ).toLocaleDateString("en-US", {
                                                                 year: "numeric",
                                                                 month: "long",

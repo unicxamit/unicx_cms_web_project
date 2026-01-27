@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { searchItems } from '../../../../../api';
+// import { searchItems } from '../../../../../api';
 import './GlobalSearchBar.css';
 
 const GlobalSearchBar = ({ onResultSelect }) => {
@@ -47,15 +47,15 @@ const GlobalSearchBar = ({ onResultSelect }) => {
             return;
         }
 
-        try {
-            setIsLoading(true);
-            const searchResults = await searchItems(searchQuery);
-            setResults(searchResults);
-            setIsLoading(false);
-        } catch (error) {
-            console.error('Error during search:', error);
-            setIsLoading(false);
-        }
+        // try {
+        //     setIsLoading(true);
+        //     const searchResults = await searchItems(searchQuery);
+        //     setResults(searchResults);
+        //     setIsLoading(false);
+        // } catch (error) {
+        //     console.error('Error during search:', error);
+        //     setIsLoading(false);
+        // }
     };
 
     const handleInputChange = (e) => {

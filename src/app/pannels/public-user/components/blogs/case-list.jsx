@@ -105,14 +105,18 @@ function CaseStudyListPage() {
                                     >
                                         <div className="wt-post-media">
                                             <NavLink to={`${publicUser.caseStudy.DETAIL}/${cs._id}`}>
-                                                <JobZImage src={cs.images} alt={cs.title} />
+                                                {/* <JobZImage src={cs.images} alt={cs.title} /> */}
+                                                 <JobZImage
+                                                  src={cs?.images?.[0]}
+                                                  alt={cs?.title}
+                                                />
                                             </NavLink>
                                         </div>
                                         <div className="wt-post-info">
                                             <div className="wt-post-meta">
                                                 <ul>
                                                     <li className="post-date">
-                                                        {new Date(cs.created_at).toLocaleDateString(
+                                                        {new Date(cs.createdAt).toLocaleDateString(
                                                             "en-US",
                                                             { year: "numeric", month: "long", day: "numeric" }
                                                         )}
@@ -133,7 +137,7 @@ function CaseStudyListPage() {
                                                 </h4>
                                             </div>
                                             <div className="wt-post-text">
-                                                <p>{cs.excerpt || "No description available."}</p>
+                                                <p>{cs.Description || "No description available."}</p>
                                             </div>
                                             <div className="wt-post-readmore">
                                                 <NavLink

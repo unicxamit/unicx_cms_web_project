@@ -25,14 +25,35 @@ export const createCategory = async (req, res, next) => {
 };
 
 // Get all categories (sorted by order_index)
+// export const getAllCategories = async (req, res, next) => {
+//   try {
+//     const category = await Category.find()
+//       .sort({ order_index: 1, createdAt: -1 });
+
+//     res.status(200).json({
+//       status: true,
+//       message: "All categories retrieved successfully",
+//       category,
+//      totalCategory:category.length,
+//     });
+//   } catch (error) {
+//     console.log("Get all categories error:", error);
+//     next(error);
+//   }
+// };
+
+
 export const getAllCategories = async (req, res, next) => {
   try {
-    const category = await Category.find()
-      .sort({ order_index: 1, createdAt: -1 });
-
+    const [category, totalCategory] = await Promise.all([
+      Category.find().sort({ order_index: 1, createdAt: -1 }),
+      Category.countDocuments()
+    ]);
+console.log(totalCategory,"totalcategory")
     res.status(200).json({
       status: true,
       message: "All categories retrieved successfully",
+      totalCategory,
       category,
     });
   } catch (error) {
@@ -40,7 +61,6 @@ export const getAllCategories = async (req, res, next) => {
     next(error);
   }
 };
-
 
 // Get all categories (sorted by order_index and status)
 export const getAllCategoriesStatus = async (req, res, next) => {

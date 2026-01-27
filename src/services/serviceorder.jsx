@@ -47,8 +47,8 @@
 
 // const OrderService = () => {
 
-// const [data, setData] = useState(buildHierarchy());
-// const [editData, setEditData] = useState(null);
+// const [data, sedivata] = useState(buildHierarchy());
+// const [edidivata, setEdidivata] = useState(null);
 // const [showEditModal, setShowEditModal] = useState(false);
 
 // //   const [openIds, setOpenIds] = useState(["1", "2"]);
@@ -56,7 +56,7 @@
 //   categoryList.map(c => c.category_id)
 // );
 
-//   const [draggedItem, setDraggedItem] = useState(null);
+//   const [draggedItem, sedivraggedItem] = useState(null);
 
 //   const toggleOpen = (id) => {
 //     setOpenIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
@@ -73,17 +73,17 @@
 //     } else {
 //       sub.status = sub.status === "active" ? "inactive" : "active";
 //     }
-//     setData(newData);
+//     sedivata(newData);
 //   };
 
 //   const onDragStart = (e, item) => {
-//     setDraggedItem(item);
+//     sedivraggedItem(item);
 //   };
 
-//   const onDragOver = (e) => e.preventDefault();
+//   const onDragOver = (e) => e.prevendivefault();
 
 //   const onDrop = (e, type, targetIdx, parents = {}) => {
-//     e.preventDefault();
+//     e.prevendivefault();
 //     if (!draggedItem || draggedItem.type !== type) return;
 
 //     const newData = JSON.parse(JSON.stringify(data));
@@ -110,13 +110,13 @@
 //       sub.services.forEach((x, i) => x.order_index = i);
 //     }
 
-//     setData(newData);
-//     setDraggedItem(null);
+//     sedivata(newData);
+//     sedivraggedItem(null);
 //   };
 // const deleteCategory = (catId) => {
 //   if (!window.confirm("Delete this category?")) return;
 
-//   setData(prev => ({
+//   sedivata(prev => ({
 //     ...prev,
 //     categories: prev.categories.filter(
 //       c => c.category_id !== catId
@@ -127,7 +127,7 @@
 // const deleteSubCategory = (catId, subId) => {
 //   if (!window.confirm("Delete this sub category?")) return;
 
-//   setData(prev => ({
+//   sedivata(prev => ({
 //     ...prev,
 //     categories: prev.categories.map(c =>
 //       c.category_id === catId
@@ -145,7 +145,7 @@
 // const deleteService = (catId, subId, serviceId) => {
 //   if (!window.confirm("Delete this service?")) return;
 
-//   setData(prev => ({
+//   sedivata(prev => ({
 //     ...prev,
 //     categories: prev.categories.map(c =>
 //       c.category_id === catId
@@ -168,9 +168,9 @@
 // };
 
 // const handleSaveEdit = () => {
-//   const { type, catId, subId, serviceId, value } = editData;
+//   const { type, catId, subId, serviceId, value } = edidivata;
 
-//   setData(prev => ({
+//   sedivata(prev => ({
 //     ...prev,
 //     categories: prev.categories.map(cat => {
 //       if (cat.category_id !== catId) return cat;
@@ -251,7 +251,7 @@
 //               <div className="right">
 //                <button
 //   onClick={() =>
-//     setEditData({
+//     setEdidivata({
 //       type: "category",
 //       catId: cat.category_id,
 //       value: cat.category_name
@@ -304,7 +304,7 @@
 //                        <div className="right">
 //                 <button
 //   onClick={() =>
-//     setEditData({
+//     setEdidivata({
 //       type: "sub_category",
 //       catId: cat.category_id,
 //       subId: sub.sub_category_id,
@@ -359,7 +359,7 @@
 //                             <div>
 //                             <button
 //   onClick={() =>
-//     setEditData({
+//     setEdidivata({
 //       type: "service",
 //       catId: cat.category_id,
 //       subId: sub.sub_category_id,
@@ -400,9 +400,9 @@
 
 //       <input
 //         className="form-control"
-//         value={editData.value}
+//         value={edidivata.value}
 //         onChange={(e) =>
-//           setEditData({ ...editData, value: e.target.value })
+//           setEdidivata({ ...edidivata, value: e.target.value })
 //         }
 //       />
 
@@ -429,19 +429,9 @@
 
 // export default OrderService;
 
-import React, { useEffect, useState } from "react";
-import {
-  ChevronRight,
-  ChevronDown,
-  LayoutGrid,
-  Layers,
-  Trash2,
-  Edit3,
-  X,
-  GripVertical,
-  Plus,
-} from "lucide-react";
-import { IoChevronUpOutline } from "react-icons/io5";
+import React, { useEffect, useRef, useState } from "react";
+import { ChevronRight, LayoutGrid } from "lucide-react";
+import { IoChevronDown, IoAddOutline } from "react-icons/io5";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
@@ -470,40 +460,9 @@ import {
   updateServiceDetails,
 } from "../adminApi.js";
 import Loader from "../app/common/loader.jsx";
+import { useNavigate } from "react-router-dom";
 
 // Build hierarchical data structure
-// const buildHierarchyFromApi = (categories, subCategories, services) => {
-//   return {
-//     categories: categories.map((cat, cIndex) => ({
-//       category_id: cat._id,
-//       category_name: cat.name,
-//       order_index: cat.order_index ?? cIndex + 1,
-//       status: cat.status || "active",
-//       subcategories: subCategories
-//         .filter((sub) =>
-//           Array.isArray(sub.category)
-//             ? sub.category[0]?._id === cat._id
-//             : sub.category === cat._id
-//         )
-//         .map((sub, sIndex) => ({
-//           sub_category_id: sub._id,
-//           sub_category_name: sub.name,
-//           status: sub.status || "active",
-//           order_index: sub.order_index ?? sIndex + 1,
-
-//           services: services
-//             .filter((srv) => srv.subcategory[0]._id === sub._id)
-//             .map((srv, iIndex) => ({
-//               id: srv._id,
-//               title: srv.name,
-//               price: srv.price || "",
-//               status: srv.status || "active",
-//               order_index: srv.order_index ?? iIndex + 1,
-//             })),
-//         })),
-//     })),
-//   };
-// };
 
 const buildHierarchyFromApi = (categories, subCategories, services) => {
   return {
@@ -516,7 +475,7 @@ const buildHierarchyFromApi = (categories, subCategories, services) => {
         .filter((sub) =>
           Array.isArray(sub.category)
             ? sub.category[0]?._id === cat._id
-            : sub.category === cat._id
+            : sub.category === cat._id,
         )
         .map((sub, sIndex) => ({
           sub_category_id: sub._id,
@@ -538,10 +497,9 @@ const buildHierarchyFromApi = (categories, subCategories, services) => {
 };
 
 const OrderService = () => {
-  // const [data, setData] = useState(buildHierarchy());
-  // const [editData, setEditData] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [editId, setEditId] = useState(null);
 
   const [modalData, setModalData] = useState({
     type: "", // category | sub_category | service
@@ -551,190 +509,102 @@ const OrderService = () => {
     name: "",
     status: "active",
   });
-  // const [categories, setCategories] = useState([]);
-  // const [subCategories, setSubCategories] = useState([]);
-  // const [services, setServices] = useState([]);
-  const [data, setData] = useState({ categories: [] });
+  const navigate = useNavigate();
+  const [data, sedivata] = useState({ categories: [] });
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [openIds, setOpenIds] = useState([]);
   const [openIdssubcategory, setOpenIdsSubCategory] = useState([]);
-  
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (showModal) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
+    }
+  }, [showModal]);
+
   // ---------- FETCH ----------
 
-  // useEffect(() => {
-  //   const fetchAll = async () => {
-  //     try {
-  //       setLoading(true);
+  useEffect(() => {
+    let isMounted = true; // ✅ prevent state update after unmount
 
-  //       // 1️⃣ Categories
-  //       const catRes = await getCategories();
+    const fetchAll = async () => {
+      try {
+        setLoading(true);
 
-  //       // 2️⃣ Subcategories by category
-  //       let allSubCategories = [];
-  //       for (const cat of catRes.category) {
-  //         const subRes = await getSubCategoriesByCategoryId(cat._id);
-  //         allSubCategories.push(...subRes.subCategories);
-  //       }
-  //       // console.log(allSubCategories,"allservicessubcategory details")
-  //       // 3️⃣ Services by subcategory
-  //       let allServices = [];
-  //       for (const sub of allSubCategories) {
-  //         const srvRes = await getserviceBysubCategoryId(sub._id);
-  //         allServices.push(...srvRes.services);
-  //       }
-  //       // console.log(allServices,"allservices details")
-  //       // setCategories(catRes.category);
-  //       // setSubCategories(allSubCategories);
-  //       // setServices(allServices);
+        // 1️⃣ Fetch Categories
+        const catRes = await getCategories();
+        const categories = catRes?.category ?? [];
 
-  //       // 4️⃣ Build tree
-  //       const hierarchy = buildHierarchyFromApi(
-  //         catRes.category,
-  //         allSubCategories,
-  //         allServices
-  //       );
-  //       console.log(hierarchy, "hierarchy data");
-  //       setData(hierarchy);
-  //       setOpenIds(catRes.category.map((c) => c._id));
-  //     } catch (err) {
-  //       console.error(err);
-  //       setMessage("Failed to fetch data");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+        if (!categories.length) {
+          sedivata({ categories: [] });
+          return;
+        }
 
-  //   fetchAll();
-  // }, []);
+        // 2️⃣ Fetch Subcategories in PARALLEL
+        const subCategoryPromises = categories.map((cat) =>
+          getSubCategoriesByCategoryId(cat._id),
+        );
 
-//   useEffect(() => {
-//   const fetchAll = async () => {
-//     try {
-//       setLoading(true);
+        const subCategoryResponses = await Promise.all(subCategoryPromises);
 
-//       // 1️⃣ Categories
-//       const catRes = await getCategories();
-//       const categories = catRes.category || [];
+        const allSubCategories = subCategoryResponses.flatMap(
+          (res) => res?.subCategories ?? [],
+        );
 
-//       // 2️⃣ Subcategories (PARALLEL)
-//       const subCategoryPromises = categories.map((cat) =>
-//         getSubCategoriesByCategoryId(cat._id)
-//       );
+        // 3️⃣ Fetch Services in PARALLEL
+        const servicePromises = allSubCategories.map((sub) =>
+          getserviceBysubCategoryId(sub._id),
+        );
 
-//       const subCategoryResponses = await Promise.all(subCategoryPromises);
-//       const allSubCategories = subCategoryResponses.flatMap(
-//         (res) => res.subCategories || []
-//       );
+        const serviceResponses = await Promise.all(servicePromises);
 
-//       // 3️⃣ Services (PARALLEL)
-//       const servicePromises = allSubCategories.map((sub) =>
-//         getserviceBysubCategoryId(sub._id)
-//       );
+        const allServices = serviceResponses.flatMap(
+          (res) => res?.services ?? [],
+        );
 
-//       const serviceResponses = await Promise.all(servicePromises);
-//       const allServices = serviceResponses.flatMap(
-//         (res) => res.services || []
-//       );
+        // 4️⃣ Build hierarchy
+        const hierarchy = buildHierarchyFromApi(
+          categories,
+          allSubCategories,
+          allServices,
+        );
 
-//       // 4️⃣ Build hierarchy (SAME LOGIC)
-//       const hierarchy = buildHierarchyFromApi(
-//         categories,
-//         allSubCategories,
-//         allServices
-//       );
-
-//       setData(hierarchy);
-//       setOpenIds(categories.map((c) => c._id));
-//     } catch (err) {
-//       console.error(err);
-//       setMessage("Failed to fetch data");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   fetchAll();
-// }, []);
-
-useEffect(() => {
-  let isMounted = true; // ✅ prevent state update after unmount
-
-  const fetchAll = async () => {
-    try {
-      setLoading(true);
-
-      // 1️⃣ Fetch Categories
-      const catRes = await getCategories();
-      const categories = catRes?.category ?? [];
-
-      if (!categories.length) {
-        setData({ categories: [] });
-        return;
+        if (isMounted) {
+          sedivata(hierarchy);
+          setOpenIds(categories.map((c) => c._id));
+        }
+      } catch (err) {
+        console.error(err);
+        if (isMounted) {
+          setMessage("Failed to fetch data");
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
+    };
 
-      // 2️⃣ Fetch Subcategories in PARALLEL
-      const subCategoryPromises = categories.map((cat) =>
-        getSubCategoriesByCategoryId(cat._id)
-      );
+    fetchAll();
 
-      const subCategoryResponses = await Promise.all(subCategoryPromises);
-
-      const allSubCategories = subCategoryResponses.flatMap(
-        (res) => res?.subCategories ?? []
-      );
-
-      // 3️⃣ Fetch Services in PARALLEL
-      const servicePromises = allSubCategories.map((sub) =>
-        getserviceBysubCategoryId(sub._id)
-      );
-
-      const serviceResponses = await Promise.all(servicePromises);
-
-      const allServices = serviceResponses.flatMap(
-        (res) => res?.services ?? []
-      );
-
-      // 4️⃣ Build hierarchy
-      const hierarchy = buildHierarchyFromApi(
-        categories,
-        allSubCategories,
-        allServices
-      );
-
-      if (isMounted) {
-        setData(hierarchy);
-        setOpenIds(categories.map((c) => c._id));
-      }
-    } catch (err) {
-      console.error(err);
-      if (isMounted) {
-        setMessage("Failed to fetch data");
-      }
-    } finally {
-      if (isMounted) {
-        setLoading(false);
-      }
-    }
-  };
-
-  fetchAll();
-
-  return () => {
-    isMounted = false; // ✅ cleanup
-  };
-}, []);
-
+    return () => {
+      isMounted = false; // ✅ cleanup
+    };
+  }, []);
 
   const toggleOpen = (id) => {
     setOpenIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
     );
   };
 
   const toggleOpenSubcategory = (id) => {
     setOpenIdsSubCategory((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
     );
   };
 
@@ -757,7 +627,7 @@ useEffect(() => {
     // 🔹 SUBCATEGORY
     if (subId && !serviceId) {
       const sub = category.subcategories.find(
-        (s) => s.sub_category_id === subId
+        (s) => s.sub_category_id === subId,
       );
       if (!sub) return;
 
@@ -769,7 +639,7 @@ useEffect(() => {
     // 🔹 SERVICE
     if (serviceId) {
       const sub = category.subcategories.find(
-        (s) => s.sub_category_id === subId
+        (s) => s.sub_category_id === subId,
       );
       const srv = sub?.services.find((s) => s.id === serviceId);
       if (!srv) return;
@@ -780,7 +650,7 @@ useEffect(() => {
     }
 
     // 🔥 UI UPDATE (Optimistic)
-    setData((prev) => {
+    sedivata((prev) => {
       const updated = structuredClone(prev);
 
       updated.categories.forEach((cat) => {
@@ -843,13 +713,13 @@ useEffect(() => {
           order_index: index + 1,
         }));
 
-        setData((prev) => ({ ...prev, categories: reordered }));
+        sedivata((prev) => ({ ...prev, categories: reordered }));
 
         await updateCategoryOrder_index(
           reordered.map((cat) => ({
             _id: cat.category_id,
             order_index: cat.order_index,
-          }))
+          })),
         );
       }
 
@@ -859,7 +729,7 @@ useEffect(() => {
 
         const categoriesCopy = [...data.categories];
         const category = categoriesCopy.find(
-          (c) => c.category_id === categoryId
+          (c) => c.category_id === categoryId,
         );
 
         if (!category) return;
@@ -875,13 +745,13 @@ useEffect(() => {
 
         category.subcategories = reorderedSub;
 
-        setData((prev) => ({ ...prev, categories: categoriesCopy }));
+        sedivata((prev) => ({ ...prev, categories: categoriesCopy }));
 
         await updateSubCategoryOrder_index(
           reorderedSub.map((sub) => ({
             _id: sub.sub_category_id,
             order_index: sub.order_index,
-          }))
+          })),
         );
       }
 
@@ -907,18 +777,18 @@ useEffect(() => {
 
         subCategory.services = reorderedServices;
 
-        setData((prev) => ({ ...prev, categories: categoriesCopy }));
+        sedivata((prev) => ({ ...prev, categories: categoriesCopy }));
 
         await updateserviceOrder_index(
           reorderedServices.map((srv) => ({
             _id: srv.id,
             order_index: srv.order_index,
-          }))
+          })),
         );
       }
     } catch (error) {
       console.error("Order update failed, reverting UI", error);
-      setData(prevData); // 🔁 rollback UI
+      sedivata(prevData); // 🔁 rollback UI
     }
   };
 
@@ -926,7 +796,7 @@ useEffect(() => {
     if (!window.confirm("Delete this category?")) return;
 
     // 🔥 Optimistic UI update
-    setData((prev) => ({
+    sedivata((prev) => ({
       ...prev,
       categories: prev.categories.filter((c) => c.category_id !== catId),
     }));
@@ -943,17 +813,17 @@ useEffect(() => {
     if (!window.confirm("Delete this sub category?")) return;
 
     // 🔥 Optimistic UI update
-    setData((prev) => ({
+    sedivata((prev) => ({
       ...prev,
       categories: prev.categories.map((c) =>
         c.category_id === catId
           ? {
               ...c,
               subcategories: c.subcategories.filter(
-                (s) => s.sub_category_id !== subId
+                (s) => s.sub_category_id !== subId,
               ),
             }
-          : c
+          : c,
       ),
     }));
 
@@ -969,7 +839,7 @@ useEffect(() => {
     if (!window.confirm("Delete this service?")) return;
 
     // 🔥 Optimistic UI update
-    setData((prev) => ({
+    sedivata((prev) => ({
       ...prev,
       categories: prev.categories.map((c) =>
         c.category_id === catId
@@ -980,13 +850,13 @@ useEffect(() => {
                   ? {
                       ...s,
                       services: s.services.filter(
-                        (ser) => ser.id !== serviceId
+                        (ser) => ser.id !== serviceId,
                       ),
                     }
-                  : s
+                  : s,
               ),
             }
-          : c
+          : c,
       ),
     }));
 
@@ -1003,7 +873,7 @@ useEffect(() => {
     type,
     catId = null,
     subId = null,
-    serviceId = null
+    serviceId = null,
   ) => {
     setModalData({
       type,
@@ -1013,6 +883,7 @@ useEffect(() => {
       name: "",
       status: "active",
     });
+    setEditId(false);
     setShowModal(true);
   };
 
@@ -1033,10 +904,12 @@ useEffect(() => {
       name,
       status,
     });
+    setEditId(true);
     setShowModal(true);
   };
 
-  const handleSaveModal = async () => {
+  const handleSaveModal = async (e) => {
+    e.preventDefault();
     const { type, catId, subId, serviceId, name, status } = modalData;
 
     if (!name.trim()) {
@@ -1050,19 +923,19 @@ useEffect(() => {
         if (catId) {
           await updateCategory(catId, { name, status });
 
-          setData((prev) => ({
+          sedivata((prev) => ({
             ...prev,
             categories: prev.categories.map((cat) =>
               cat.category_id === catId
                 ? { ...cat, category_name: name, status }
-                : cat
+                : cat,
             ),
           }));
         } else {
           const res = await addCategory({ name, status });
           const newCat = res.data?.category || res.category;
 
-          setData((prev) => ({
+          sedivata((prev) => ({
             ...prev,
             categories: [
               ...prev.categories,
@@ -1083,7 +956,7 @@ useEffect(() => {
           // ===== UPDATE =====
           await updateSubCategory(subId, { name, status });
 
-          setData((prev) => ({
+          sedivata((prev) => ({
             ...prev,
             categories: prev.categories.map((cat) =>
               cat.category_id === catId
@@ -1096,10 +969,10 @@ useEffect(() => {
                             sub_category_name: name,
                             status,
                           }
-                        : sub
+                        : sub,
                     ),
                   }
-                : cat
+                : cat,
             ),
           }));
 
@@ -1121,7 +994,7 @@ useEffect(() => {
           }
 
           // ✅ STATE UPDATE (INSTANT UI)
-          setData((prev) => ({
+          sedivata((prev) => ({
             ...prev,
             categories: prev.categories.map((cat) =>
               cat.category_id === catId
@@ -1137,7 +1010,7 @@ useEffect(() => {
                       },
                     ],
                   }
-                : cat
+                : cat,
             ),
           }));
         }
@@ -1148,7 +1021,7 @@ useEffect(() => {
         if (serviceId) {
           await updateSubSubCategory(serviceId, { name, status });
 
-          setData((prev) => ({
+          sedivata((prev) => ({
             ...prev,
             categories: prev.categories.map((cat) =>
               cat.category_id === catId
@@ -1161,13 +1034,13 @@ useEffect(() => {
                             services: sub.services.map((s) =>
                               s.id === serviceId
                                 ? { ...s, title: name, status }
-                                : s
+                                : s,
                             ),
                           }
-                        : sub
+                        : sub,
                     ),
                   }
-                : cat
+                : cat,
             ),
           }));
 
@@ -1187,7 +1060,7 @@ useEffect(() => {
             return;
           }
 
-          setData((prev) => ({
+          sedivata((prev) => ({
             ...prev,
             categories: prev.categories.map((cat) =>
               cat.category_id === catId
@@ -1208,10 +1081,10 @@ useEffect(() => {
                               },
                             ],
                           }
-                        : sub
+                        : sub,
                     ),
                   }
-                : cat
+                : cat,
             ),
           }));
 
@@ -1221,20 +1094,34 @@ useEffect(() => {
 
       setShowModal(false);
     } catch (err) {
+      setShowModal(false);
       console.error(err);
       alert("Operation failed");
     }
   };
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") setShowModal(false);
+    };
+
+    if (showModal) {
+      window.addEventListener("keydown", handleEsc);
+    }
+
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [showModal]);
 
   return (
-    <div className="app">
+    <div className="apps">
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="layout">
-          <header className="header">
-            <div>
-              <h1>Service Architecture</h1>
-            </div>
-            <button onClick={() => openCreateModal("category")}>
+        <div className="layouts">
+          <header className="headers">
+            <h1>Service Architecture</h1>
+
+            <button
+              className="btn btn-primary"
+              onClick={() => openCreateModal("category")}
+            >
               Create Category
             </button>
           </header>
@@ -1244,10 +1131,14 @@ useEffect(() => {
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {/* add new code here  */}
-                {loading || data.categories.length === 0 ? (
+                {loading ? (
                   <div style={{ textAlign: "center", padding: "2rem" }}>
                     {/* <div className="loaders">Loading...</div> */}
-                    <Loader/>
+                    <Loader />
+                  </div>
+                ) : data.categories.length === 0 ? (
+                  <div style={{ textAlign: "center", padding: "2rem" }}>
+                    NO Category found...
                   </div>
                 ) : (
                   data.categories.map((cat, cIdx) => (
@@ -1271,14 +1162,14 @@ useEffect(() => {
                             <div className="lefts">
                               <div>
                                 {openIds.includes(cat.category_id) ? (
-                                  <IoChevronUpOutline size={18} />
+                                  <IoChevronDown size={18} />
                                 ) : (
                                   <ChevronRight size={18} />
                                 )}
                               </div>
-
                               <div className="category_headings">
                                 <h2 className="category_names">
+                                  <span>Category</span>
                                   {cat.category_name}
                                 </h2>
                               </div>
@@ -1338,20 +1229,8 @@ useEffect(() => {
                                   {...provided.droppableProps}
                                   className="subcategory-wraps"
                                 >
-                                  <table className="my-tables">
-                                    <thead>
-                                      <tr>
-                                        <th style={{ width: "40%" }}>
-                                          Subcategory
-                                        </th>
-                                        <th>Status</th>
-                                        <th style={{ textAlign: "center" }}>
-                                          Actions
-                                        </th>
-                                      </tr>
-                                    </thead>
-
-                                    <tbody>
+                                  <div className="my-divs">
+                                    <>
                                       {cat.subcategories.map((sub, sIdx) => (
                                         <Draggable
                                           draggableId={`sub-${sub.sub_category_id}`}
@@ -1359,25 +1238,54 @@ useEffect(() => {
                                           key={sub.sub_category_id}
                                         >
                                           {(provided) => (
-                                            <>
-                                              <tr
+                                            <div className="subcategory_data_table">
+                                              <div
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
-                                                className={
-                                                  sub.status !== "active"
-                                                    ? "inactive-rows"
-                                                    : ""
-                                                }
+                                                className={"subcategory-table"}
                                                 onClick={() =>
                                                   toggleOpenSubcategory(
-                                                    sub.sub_category_id
+                                                    sub.sub_category_id,
                                                   )
                                                 }
                                               >
-                                                <td>{sub.sub_category_name}</td>
+                                                <div className="lefts">
+                                                  <div
+                                                    style={{
+                                                      marginLeft: "0.8rem",
+                                                    }}
+                                                  >
+                                                    {openIdssubcategory.includes(
+                                                      sub.sub_category_id,
+                                                    ) ? (
+                                                      <IoChevronDown
+                                                        size={18}
+                                                      />
+                                                    ) : (
+                                                      <ChevronRight size={18} />
+                                                    )}
+                                                  </div>
+                                                  <div
+                                                    style={{
+                                                      display: "flex",
+                                                      columnGap: "1rem",
+                                                    }}
+                                                  >
+                                                    <span
+                                                      style={{
+                                                        fontSize: "16px",
+                                                        fontWeight: "400",
+                                                        color: "#265083",
+                                                      }}
+                                                    >
+                                                      SubCategory
+                                                    </span>
+                                                    {sub.sub_category_name}
+                                                  </div>
+                                                </div>
 
-                                                <td>
+                                                <div>
                                                   <label
                                                     className="switchs"
                                                     style={{
@@ -1395,15 +1303,15 @@ useEffect(() => {
                                                       onChange={() =>
                                                         handleToggleStatus(
                                                           cat.category_id,
-                                                          sub.sub_category_id
+                                                          sub.sub_category_id,
                                                         )
                                                       }
                                                     />
                                                     <span></span>
                                                   </label>
-                                                </td>
+                                                </div>
 
-                                                <td
+                                                <div
                                                   style={{
                                                     textAlign: "center",
                                                     display: "flex",
@@ -1433,7 +1341,7 @@ useEffect(() => {
                                                     onClick={() =>
                                                       handledeleteSubCategory(
                                                         cat.category_id,
-                                                        sub.sub_category_id
+                                                        sub.sub_category_id,
                                                       )
                                                     }
                                                   >
@@ -1441,20 +1349,20 @@ useEffect(() => {
                                                       size={15}
                                                     />
                                                   </span>
-                                                </td>
-                                              </tr>
+                                                </div>
+                                              </div>
 
                                               {/* SERVICES */}
                                               {openIdssubcategory.includes(
-                                                sub.sub_category_id
+                                                sub.sub_category_id,
                                               ) && (
                                                 <Droppable
                                                   droppableId={`srv-${sub.sub_category_id}`}
                                                   type="SERVICE"
                                                 >
                                                   {(provided) => (
-                                                    <tr>
-                                                      <td colSpan="3">
+                                                    <div>
+                                                      <div colSpan="3">
                                                         <div
                                                           ref={
                                                             provided.innerRef
@@ -1478,18 +1386,33 @@ useEffect(() => {
                                                                     {...provided.dragHandleProps}
                                                                     className="service-items"
                                                                   >
-                                                                    <div className="dots"></div>
+                                                                    {/* <div className="dots"></div> */}
 
                                                                     <div
                                                                       style={{
                                                                         flex: 1,
+                                                                        gap: "1rem",
+                                                                        fontSize:
+                                                                          "16px",
+                                                                        fontWeight:
+                                                                          "400",
                                                                       }}
                                                                     >
+                                                                      <span
+                                                                        style={{
+                                                                          color:
+                                                                            "#145aaf",
+                                                                          paddingRight:
+                                                                            "1rem",
+                                                                        }}
+                                                                      >
+                                                                        Service
+                                                                      </span>
                                                                       {
                                                                         ser.title
                                                                       }
                                                                     </div>
-
+                                                                   <div className="action_div">
                                                                     <label
                                                                       className="switchs"
                                                                       style={{
@@ -1507,7 +1430,7 @@ useEffect(() => {
                                                                           handleToggleStatus(
                                                                             cat.category_id,
                                                                             sub.sub_category_id,
-                                                                            ser.id
+                                                                            ser.id,
                                                                           )
                                                                         }
                                                                       />
@@ -1539,10 +1462,10 @@ useEffect(() => {
                                                                               name: ser.title,
                                                                               status:
                                                                                 ser.status,
-                                                                            }
+                                                                            },
                                                                           ) ||
                                                                           setShowEditModal(
-                                                                            true
+                                                                            true,
                                                                           )
                                                                         }
                                                                       >
@@ -1559,7 +1482,7 @@ useEffect(() => {
                                                                           deleteService(
                                                                             cat.category_id,
                                                                             sub.sub_category_id,
-                                                                            ser.id
+                                                                            ser.id,
                                                                           )
                                                                         }
                                                                       >
@@ -1569,52 +1492,80 @@ useEffect(() => {
                                                                           }
                                                                         />
                                                                       </span>
+                                                                      <span
+                                                                        className="edits"
+                                                                        onClick={() =>
+                                                                          navigate(
+                                                                            `/admin/subsubcategory-details/${ser.id}`,
+                                                                            {
+                                                                              state:
+                                                                                {
+                                                                                  serviceName:
+                                                                                    ser.title ,
+                                                                                  categoryName:
+                                                                                    cat.category_name,
+                                                                                  subcategoryName:
+                                                                                    sub.sub_category_name,
+                                                                                },
+                                                                            },
+                                                                          )
+                                                                        }
+                                                                      >
+                                                                        <IoAddOutline
+                                                                          size={
+                                                                            15
+                                                                          }
+                                                                        />
+                                                                      </span>
                                                                     </div>
+                                                                  </div>
                                                                   </div>
                                                                 )}
                                                               </Draggable>
-                                                            )
+                                                            ),
                                                           )}
-
+                                                          <button
+                                                            className="btn btn-primary mt-2"
+                                                            style={{
+                                                              marginLeft:
+                                                                "1.9rem",
+                                                            }}
+                                                            onClick={() =>
+                                                              openCreateModal(
+                                                                "service",
+                                                                cat.category_id,
+                                                                sub.sub_category_id,
+                                                              )
+                                                            }
+                                                          >
+                                                            add services
+                                                          </button>
                                                           {provided.placeholder}
                                                         </div>
-                                                        <button
-                                                        onClick={() =>
-                                                          openCreateModal(
-                                                            "service",
-                                                            cat.category_id,
-                                                            sub.sub_category_id
-                                                          )
-                                                        }
-                                                      >
-                                                        add services
-                                                      </button>
-
-                                                      </td>
-                                                       
-                                                    </tr>
+                                                      </div>
+                                                    </div>
                                                   )}
                                                 </Droppable>
                                               )}
-                                            </>
+                                            </div>
                                           )}
                                         </Draggable>
                                       ))}
-
+                                      <div
+                                        className="btn btn-primary"
+                                        onClick={() =>
+                                          openCreateModal(
+                                            "sub_category",
+                                            cat.category_id,
+                                          )
+                                        }
+                                        style={{ margin: "0.5rem" }}
+                                      >
+                                        Add subcategory
+                                      </div>
                                       {provided.placeholder}
-                                    </tbody>
-                                  </table>
-
-                                  <button
-                                    onClick={() =>
-                                      openCreateModal(
-                                        "sub_category",
-                                        cat.category_id
-                                      )
-                                    }
-                                  >
-                                    New Subcategory
-                                  </button>
+                                    </>
+                                  </div>
                                 </div>
                               )}
                             </Droppable>
@@ -1630,56 +1581,105 @@ useEffect(() => {
             )}
           </Droppable>
 
-          <button className="create-roots">
+          <button
+            className="create-roots"
+            onClick={() => openCreateModal("category")}
+          >
             <LayoutGrid /> Create New Root Category
           </button>
 
           {/* EDIT MODAL */}
 
-
           {showModal && (
-            <div className="modal-overlays">
-              <div className="modal-boxs">
+            // <div className="modal-overlays" onClick={() => setShowModal(false)}>
+            //   <div className="modal-boxs" onClick={(e) => e.stopPropagation()}>
+            //     <h4>
+            //       {modalData.name
+            //         ? "Edit"
+            //         : "Create"}{" "}
+            //       {modalData.type.replace("_", " ")}
+            //     </h4>
+
+            //     {/* NAME */}
+            //     <input
+            //     ref={inputRef}
+            //       className="form-control mb-2"
+            //       placeholder="Enter name"
+            //       value={modalData.name}
+            //       onChange={(e) =>
+            //         setModalData({ ...modalData, name: e.target.value })
+            //       }
+            //     />
+
+            //     {/* STATUS */}
+            //     <select
+            //       className="form-select"
+            //       value={modalData.status}
+            //       onChange={(e) =>
+            //         setModalData({ ...modalData, status: e.target.value })
+            //       }
+            //     >
+            //       <option value="active">Active</option>
+            //       <option value="inactive">Inactive</option>
+            //     </select>
+
+            //     <div className="mt-3 text-end">
+            //       <button
+            //         className="btns btn-secondarys me-2"
+            //         onClick={() => setShowModal(false)}
+            //       >
+            //         Cancel
+            //       </button>
+            //       <button className="btns btn-primarys" onClick={handleSaveModal}>
+            //         Save
+            //       </button>
+            //     </div>
+            //   </div>
+            // </div>
+            <div className="modal-overlays" onClick={() => setShowModal(false)}>
+              <div
+                className="modal-boxs"
+                onClick={(e) => e.stopPropagation()} // prevent close on inside click
+              >
                 <h4>
-                  {modalData.name
-                    ? "Edit"
-                    : "Create"}{" "}
+                  {editId ? "Edit" : "Create"}{" "}
                   {modalData.type.replace("_", " ")}
                 </h4>
+                <form>
+                  <input
+                    ref={inputRef}
+                    className="form-control mb-2"
+                    placeholder="Enter name"
+                    value={modalData.name}
+                    onChange={(e) =>
+                      setModalData({ ...modalData, name: e.target.value })
+                    }
+                  />
 
-                {/* NAME */}
-                <input
-                  className="form-control mb-2"
-                  placeholder="Enter name"
-                  value={modalData.name}
-                  onChange={(e) =>
-                    setModalData({ ...modalData, name: e.target.value })
-                  }
-                />
-
-                {/* STATUS */}
-                <select
-                  className="form-select"
-                  value={modalData.status}
-                  onChange={(e) =>
-                    setModalData({ ...modalData, status: e.target.value })
-                  }
-                >
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                </select>
-
-                <div className="mt-3 text-end">
-                  <button
-                    className="btns btn-secondarys me-2"
-                    onClick={() => setShowModal(false)}
+                  <select
+                    className="form-select mb-3"
+                    value={modalData.status}
+                    onChange={(e) =>
+                      setModalData({ ...modalData, status: e.target.value })
+                    }
                   >
-                    Cancel
-                  </button>
-                  <button className="btns btn-primarys" onClick={handleSaveModal}>
-                    Save
-                  </button>
-                </div>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+
+                  <div className="text-end">
+                    <button type="button" className="btns btn-secondarys me-2">
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="btns btn-primarys"
+                      onClick={handleSaveModal}
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           )}

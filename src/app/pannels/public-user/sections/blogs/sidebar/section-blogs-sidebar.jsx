@@ -76,7 +76,7 @@ function SectionBlogsSidebar() {
                                         </div>
                                         <div className="wt-post-info">
                                             <div className="wt-post-header">
-                                                <span className="post-date">{new Date(article.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                                <span className="post-date">{new Date(article.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                                                 <span className="post-title">
                                                     <NavLink to={`${publicUser.caseStudy.DETAIL}/${article._id}`}>{article.title}</NavLink>
                                                 </span>

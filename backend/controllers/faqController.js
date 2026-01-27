@@ -26,14 +26,18 @@ export const createFaq = async (req, res, next) => {
 // Get all FAQs
 export const getAllFaqs = async (req, res, next) => {
   try {
-    const faqs = await Faq.find()
-      .sort({ createdAt: -1 })
-      .populate({ path: "category", select: "name" });
+    // const faqs = await Faq.find()
+    //   .sort({ createdAt: -1 })
+    //   .populate({ path: "category", select: "name" });
 
+      const [faqs,totalFaqs]= await Promise.all([
+        Faq.find().sort({createdAt:-1}).populate({path:"category",select:"name"}),Faq.countDocuments()
+      ])
     res.status(200).json({
       status: true,
       message: "All FAQs retrieved successfully",
       faqs,
+      totalFaqs,
     });
   } catch (error) {
     console.log("Get all FAQs error:", error);

@@ -1,48 +1,4 @@
-// import { publicUrlFor } from "../../globals/constants";
 
-// function JobZImage(props) {
-//     return(
-//         <>
-//             <img {...props} src={publicUrlFor(props.src)} alt={props.alt}/>
-//         </>
-//     )
-// }
-
-// export default JobZImage;
-
-
-// import { publicUrlFor } from "../../globals/constants";
-
-// function JobZImage({
-//   src,
-//   alt = "",
-//   fallback = "images/default-placeholder.png",
-//   ...rest
-// }) {
-//   const getImageSrc = () => {
-//     if (!src) return publicUrlFor(fallback);
-
-//     if (src.startsWith("http") || src.startsWith("https")) {
-//       return src; // Backend image
-//     }
-
-//     return publicUrlFor(src); // Local asset image
-//   };
-
-//   return (
-//     <img
-//       {...rest}
-//       src={getImageSrc()}
-//       alt={alt}
-//       onError={(e) => {
-//         e.target.onerror = null;
-//         e.target.src = publicUrlFor(fallback);
-//       }}
-//     />
-//   );
-// }
-
-// export default JobZImage;
 
 import { publicUrlFor } from "../../globals/constants";
 

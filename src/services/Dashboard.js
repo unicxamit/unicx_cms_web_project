@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../layouts/sidebar';
-import { getCategories, getSubCategories, getSubSubCategories } from '../api';
-import { getUsers } from '../api'; // adjust the path if needed
+// import { getCategories, getSubCategories, getSubSubCategories } from '../api';
+// import { getUsers } from '../api'; // adjust the path if needed
+import { getCategories, getSubCategories, getSubSubCategories, getUsers } from '../adminApi';
 
 
-function AdminDashboard() {
+function AdminDashboardList() {
   const [categoryCount, setCategoryCount] = useState(0);
   const [subcategoryCount, setSubcategoryCount] = useState(0);
   const [subSubcategoryCount, setSubSubcategoryCount] = useState(0);
@@ -15,11 +16,11 @@ function AdminDashboard() {
   const [user, setUser] = useState(null);
 
   // Fetch counts of categories, subcategories, and sub-subcategories
-  useEffect(() => {
-    fetchCategoryCount();
-    fetchSubcategoryCount();
-    fetchSubSubcategoryCount();
-  }, []);
+  // useEffect(() => {
+  //   fetchCategoryCount();
+  //   fetchSubcategoryCount();
+  //   fetchSubSubcategoryCount();
+  // }, []);
 
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function AdminDashboard() {
   const fetchUser = async () => {
     try {
       const users = await getUsers();
-      setUser(users[0]); // assuming API returns an array of users
+      setUser(users.users[0]); // assuming API returns an array of users
     } catch (error) {
       console.error('Error fetching user data', error);
     }
@@ -42,7 +43,8 @@ function AdminDashboard() {
   const fetchCategoryCount = async () => {
     try {
       const data = await getCategories();
-      setCategoryCount(data.length);  // assuming 'data' is an array of categories
+      // console.log(data.category,"category data")
+      setCategoryCount(data.category.length);  // assuming 'data' is an array of categories
     } catch (error) {
       console.error('Error fetching categories count', error);
     }
@@ -51,7 +53,8 @@ function AdminDashboard() {
   const fetchSubcategoryCount = async () => {
     try {
       const data = await getSubCategories();
-      setSubcategoryCount(data.length);  // assuming 'data' is an array of subcategories
+// console.log(data.subcategories,"subcategory data")
+      setSubcategoryCount(data.subCategories.length);  // assuming 'data' is an array of subcategories
     } catch (error) {
       console.error('Error fetching subcategories count', error);
     }
@@ -60,7 +63,8 @@ function AdminDashboard() {
   const fetchSubSubcategoryCount = async () => {
     try {
       const data = await getSubSubCategories();
-      setSubSubcategoryCount(data.length);  // assuming 'data' is an array of sub-subcategories
+      // console.log(data.services,"services data")
+      setSubSubcategoryCount(data.services.length);  // assuming 'data' is an array of sub-subcategories
     } catch (error) {
       console.error('Error fetching sub-subcategories count', error);
     }
@@ -69,7 +73,7 @@ function AdminDashboard() {
   return (
     <div className="container-fluid py-4 px-4 mt-3">
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-light border-bottom px-5"
+        className="navbar navbar-expand-lg navbar-light px-5"
         style={{
           position: 'fixed',
           top: 0,
@@ -80,13 +84,12 @@ function AdminDashboard() {
         }}
       >
         <div className="container-fluid d-flex justify-content-between align-items-center">
-          <h4 className="mb-0 fw-semibold fs-4">Admin Dashboard</h4>
+          <h4 className="mb-0 fw-semibold fs-5">Admin Dashboard</h4>
 
           <div className="d-flex align-items-center gap-3">
-            {/* Notification Icon */}
+          
             <i className="fas fa-bell fs-5" style={{ cursor: 'pointer' }}></i>
 
-            {/* User Circle Icon */}
             <i className="fas fa-user-circle fs-5" style={{ cursor: 'pointer' }}></i>
           </div>
         </div>
@@ -94,11 +97,6 @@ function AdminDashboard() {
 
 
       <div className="row">
-        {/* Sidebar */}
-        <div className="col-md-3 col-lg-2 bg-light min-vh-100 p-0">
-          <Sidebar />
-        </div>
-
         <div className="container col-md-9 col-lg-10 mt-4">
           <h2 className="mb-4 fw-bold">Hey {user ? user.name : 'User'}</h2>
           <div className="row g-3 align-items-center">
@@ -162,4 +160,4 @@ function AdminDashboard() {
   );
 }
 
-export default AdminDashboard;
+export default AdminDashboardList;

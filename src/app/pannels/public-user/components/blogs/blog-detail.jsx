@@ -99,7 +99,7 @@ function BlogDetailPage() {
                                         <div className="wt-post-title">
                                             <div className="wt-post-meta-list">
                                                 <div className="wt-list-content post-date">
-                                                    {new Date(blog.created_at).toLocaleDateString("en-US", {
+                                                    {new Date(blog.createdAt).toLocaleDateString("en-US", {
                                                         year: "numeric",
                                                         month: "long",
                                                         day: "numeric",

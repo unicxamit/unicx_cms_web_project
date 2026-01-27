@@ -11,7 +11,7 @@ import SectionContact from "../../sections/common/section-contact";
 import JobZImage from "../../../../common/jobz-img";
 import { NavLink, useParams } from "react-router-dom";
 import { publicUser } from "../../../../../globals/route-names";
-import { getSubSubCategoryById } from "../../../../../api";
+// import { getSubSubCategoryById } from "../../../../../api";
 import Footer1 from "../../../../common/footer/footer1";
 import SectionBlogsSidebar from "../../sections/blogs/sidebar/section-blogs-sidebar";
 import { getServiceDetailsByserviceId } from "../../../../../adminApi";

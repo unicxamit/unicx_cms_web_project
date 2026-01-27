@@ -5,9 +5,10 @@ import { NavLink } from "react-router-dom";
 import { publicUser } from "../../../../../globals/route-names";
 import DropzoneComponent from "react-dropzone-component";
 import React, { useEffect, useState } from "react";
-import { getSubSubCategoryById } from "../../../../../api";
+// import { getSubSubCategoryById } from "../../../../../api";
 import { useParams } from "react-router-dom";
 import SectionDisplay from "./SectionDisplay";
+import { getServiceDetailsByserviceId} from "../../../../../adminApi";
 
 function JobDetail2Page() {
     const [formData, setFormData] = useState({
@@ -47,32 +48,32 @@ function JobDetail2Page() {
     const fetchSubSubCategoryDetails = async () => {
         try {
             setLoading(true);
-            const data = await getSubSubCategoryById(id);
-
+            const data = await getServiceDetailsByserviceId(id);
+ const serviceData = data?.service?.[0];
             // Process sections data
             let sectionsData = [];
-            if (data.sections) {
-                if (typeof data.sections === "string") {
+            if (data.service.sections) {
+                if (typeof data.service.sections === "string") {
                     try {
-                        sectionsData = JSON.parse(data.sections);
+                        sectionsData = JSON.parse(data.service.sections);
                     } catch (e) {
                         console.error("Error parsing sections:", e);
                         sectionsData = [];
                     }
-                } else if (Array.isArray(data.sections)) {
-                    sectionsData = data.sections;
+                } else if (Array.isArray(data.service.sections)) {
+                    sectionsData = data.service.sections;
                 }
             }
 
             // Update formData with fetched data
             setFormData({
-                name: data.name || "",
-                title: data.title || "",
-                category_id: data.category_id || "",
-                subcategory_id: data.subcategory_id || "",
-                meta_description: data.meta_description || "",
-                meta_keywords: data.meta_keywords || "",
-                description: data.description || "",
+                name: serviceData.name || "",
+                title: serviceData.title || "",
+                category_id: serviceData.category_id || "",
+                subcategory_id: serviceData.subcategory_id || "",
+                meta_description: serviceData.meta_description || "",
+                meta_keywords: serviceData.meta_keywords || "",
+                description: serviceData.description || "",
                 sections: sectionsData,
             });
 

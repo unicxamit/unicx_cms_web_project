@@ -25,8 +25,8 @@ subcategory:[{
         type:mongoose.Schema.ObjectId,
         ref:"category",
     }],
-    createdAt: Date,
-updatedAt: Date
+//     createdAt: Date,
+// updatedAt: Date
 
 },{
     timestamps:true,

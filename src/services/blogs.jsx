@@ -307,14 +307,14 @@ const Blogs = () => {
 
   return (
     <div className="category-container">
-      <div className="container-wrapper">
-        <h3 className="heading_category">Blog Management</h3>
+      <div style={{width:"1300px",margin:"0 auto"}}>
+        <h3 className="heading_category"style={{marginBottom:"3rem",marginTop:"1rem"}}>Blog Management</h3>
 
         {/* Search */}
-        <div className="d-flex justify-content-between custom_headings mx-3">
+        <div className="d-flex justify-content-between custom_headings mx-3"style={{maringBottom:"3rem"}}>
           <input
             type="text"
-            className="form-control w-25"
+            className="form-control w-25"style={{height:"40px"}}
             placeholder="Search blog..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -323,7 +323,7 @@ const Blogs = () => {
           {/* <div className="col-md-4">
           <label>Filter by Category</label> */}
           <select
-            className="form-select w-25"
+            className="form-select w-25"style={{height:"40px"}}
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
           >
@@ -339,7 +339,7 @@ const Blogs = () => {
           {/* <div className="col-md-4">
           <label>Filter by Status</label> */}
           <select
-            className="form-select w-25"
+            className="form-select w-25"style={{height:"40px"}}
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
           >
@@ -351,8 +351,8 @@ const Blogs = () => {
             ))}
           </select>
           {/* </div> */}
-          <div onClick={openCreateModal} className="mb-3 create_button"style={{cursor:"pointer",border:"1px solid blue",borderRadius:"0.2rem",width:"60px",height:"20px",padding:"0 0.5rem"}}>
-            Add
+          <div  className="mb-3 create_buttons"onClick={openCreateModal}>
+           Add
           </div>
         </div>
 

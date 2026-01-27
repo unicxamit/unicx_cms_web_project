@@ -7,7 +7,8 @@ import GlobalSearchBar from "../pages/GlobalSearchBar";
 import SectionFaqGeneral from "../../sections/faq/section-faq-general";
 // import { getCaseStudies, getCategories, getFAQs } from "../../../../../api";
 // import { getBlogs } from "../../../../../api";
-import JobZImage from "../../../../common/jobz-img"; import CompanyCards from "./CompanyCards";
+import JobZImage from "../../../../common/jobz-img"; 
+import CompanyCards from "./CompanyCards";
 import Indemand from "./indemand";
 import ExpertSection from "./ExpertSecion";
 import './custom.css'
@@ -739,8 +740,8 @@ function Home1Page() {
                                                 <div className="wt-post-meta">
                                                     <ul>
                                                         <li className="post-date">
-                                                            {caseStudies[0]?.created_at
-                                                                ? new Date(caseStudies[0].created_at).toLocaleDateString("en-US", {
+                                                            {caseStudies[0]?.createdAt
+                                                                ? new Date(caseStudies[0].createdAt).toLocaleDateString("en-US", {
                                                                     year: "numeric",
                                                                     month: "long",
                                                                     day: "numeric",
@@ -780,8 +781,8 @@ function Home1Page() {
                                                         <div className="wt-post-meta">
                                                             <ul>
                                                                 <li className="post-date">
-                                                                    {caseStudy?.created_at
-                                                                        ? new Date(caseStudy.created_at).toLocaleDateString("en-US", {
+                                                                    {caseStudy?.createdAt
+                                                                        ? new Date(caseStudy.createdAt).toLocaleDateString("en-US", {
                                                                             year: "numeric",
                                                                             month: "long",
                                                                             day: "numeric",
@@ -1071,7 +1072,7 @@ images
                                             <div className="wt-post-info">
                                                 <div className="wt-post-meta ">
                                                     <ul>
-                                                        <li className="post-date">{new Date(blog.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</li>
+                                                        <li className="post-date">{new Date(blog.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</li>
                                                     </ul>
                                                 </div>
                                                 <div className="wt-post-title ">

@@ -88,7 +88,8 @@ export const publicUser = {
         GRID2: "/blog-grid/2",
         GRID3: "/blog-grid/3",
         LIST: "/blog-list",
-        DETAIL: "/blog-detail"
+        DETAIL: "/blog-detail",
+        DETAILs: "/blog-details"
     },
     caseStudy: {
         LIST: '/case-list',

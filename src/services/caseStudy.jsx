@@ -317,14 +317,14 @@ Description
 
   return (
     <div className="category-container">
-      <div className="container-wrapper">
-        <h3 className="heading_category">CaseStudy Management</h3>
+      <div style={{width:"1300px",margin:"0 auto"}}>
+        <h3 className="heading_category"style={{marginBottom:"3rem",marginTop:"1rem"}}>CaseStudy Management</h3>
 
         {/* Search */}
-        <div className="d-flex justify-content-between custom_headings mx-3">
+        <div className="d-flex justify-content-between custom_headings mx-3"style={{maringBottom:"3rem"}}>
           <input
             type="text"
-            className="form-control w-25"
+            className="form-control w-25"style={{height:"40px"}}
             placeholder="Search blog..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -356,7 +356,7 @@ Description
           </select> */}
 
           {/* Create Button */}
-          <div
+          {/* <div
             onClick={openCreateModal}
             className="mb-3  create_button"
             style={{
@@ -369,6 +369,9 @@ Description
             }}
           >
             Add
+          </div> */}
+          <div  className="mb-3 create_buttons"onClick={openCreateModal}>
+          Add
           </div>
         </div>
         {/* Table */}

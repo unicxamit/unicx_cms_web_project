@@ -8,37 +8,45 @@
   height: 100vh;
   background: #FFFFFF; 
   /* color: white; */
-  padding: 2.5rem 0 2rem 0;
+  
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  border-right: 1px solid rgba(255,255,255,0.08);
+ 
 }
 
+@media(max-width:768px){
+  .sidebar_lefts{
+    width: 100%;
+    height: 80vh;
+     padding:3rem; 
+  }
+}
+.sidebar_logos {
+  background-color:ghostwhite;
+  display:flex;
+  column-gap:0.5rem;
+  padding:0.5rem;
+  margin-top:0.95rem;
+}
 /* Logo */
-.sidebar_logos img {
-  width: 140px;
-  height: auto;
-  background-color: #ffffff;
-  border-radius: 1rem;
-  column-gap: 1rem;
-  justify-content: space-between;
-  margin-top: 1rem;
-}
 
+.user_logo {
+ width:65px;
+ height:50px;
+ background:aquamarine;
+ border-radius:1rem;
+}
 /* Title */
 .sidebar_titles {
   font-size: 1.2rem;
   font-weight: 600;
-  /* padding:0 0.5rem; */
-  /* text-align: left; */
+
 display: flex;
 column-gap: 1rem;
-/* margin-left: 0.8rem; */
-   padding: 10px 13px;
 
-  /* color: #e2e8f0; */
-  /* margin:1.5rem 0 1.5rem 0.8rem; */
+   padding: 10px 13px;
+margin-top: 1.5rem;
+ 
 }
 .sidebar_titles:hover{
   background-color: #3b82f6;
@@ -109,7 +117,7 @@ hr{
 
 /* Open state */
 .dropdowns.open {
-  height: 180px; /* adjust as needed */
+  height: 140px; /* adjust as needed */
 }
 
 /* Dropdown items */

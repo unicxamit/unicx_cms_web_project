@@ -109,8 +109,8 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
-createdAt: Date,
-updatedAt: Date,
+// createdAt: Date,
+// updatedAt: Date,
 
     resetPasswordToken: String,
     resetPasswordExpire: Date,

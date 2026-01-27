@@ -84,7 +84,7 @@ function CaseStudyDetails() {
                                                     <div className="twm-media">
                                                         <JobZImage src={caseStudy.company_logo || "images/jobs-company/pic1.jpg"} alt={caseStudy.title} />
                                                     </div>
-                                                    <h4 className="twm-job-title">{caseStudy.title} <span className="twm-job-post-duration">/ {new Date(caseStudy.created_at).toLocaleDateString()}</span></h4>
+                                                    <h4 className="twm-job-title">{caseStudy.title} <span className="twm-job-post-duration">/ {new Date(caseStudy.createdAt).toLocaleDateString()}</span></h4>
                                                     <p className="twm-job-address"><i className="feather-map-pin" />{caseStudy.location || "Location not provided"}</p>
                                                     <div className="twm-job-self-mid">
                                                         <div className="twm-job-self-mid-left">

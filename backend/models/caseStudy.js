@@ -36,8 +36,8 @@ const caseStudySchema = new mongoose.Schema(
         ref: "category",
       },
     ],
-    createdAt: Date,
-updatedAt: Date
+//     createdAt: Date,
+// updatedAt: Date
 
   },
   {

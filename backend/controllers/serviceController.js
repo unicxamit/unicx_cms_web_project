@@ -31,17 +31,38 @@ export const createService = async (req, res) => {
   }
 };
 
+// export const getAllServices = async (req, res) => {
+//   try {
+//     const services = await Service.find()
+//       .populate("category", "name")
+//       .populate("subcategory", "name")
+//       .sort({ order_index: 1 });
+
+//     res.status(200).json({
+//       status: true,
+//       message: "Services fetched successfully",
+//       services,
+//     });
+//   } catch (error) {
+//     console.error("Get All Services Error:", error);
+//     res.status(500).json({ status: false, message: "Server error" });
+//   }
+// };
 export const getAllServices = async (req, res) => {
   try {
-    const services = await Service.find()
-      .populate("category", "name")
-      .populate("subcategory", "name")
-      .sort({ order_index: 1 });
+    const [services, totalServices] = await Promise.all([
+      Service.find()
+        .populate("category", "name")
+        .populate("subcategory", "name")
+        .sort({ order_index: 1 }),
+      Service.countDocuments()
+    ]);
 
     res.status(200).json({
       status: true,
       message: "Services fetched successfully",
-      services,
+      totalServices,
+     services,
     });
   } catch (error) {
     console.error("Get All Services Error:", error);
