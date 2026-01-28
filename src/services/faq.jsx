@@ -246,19 +246,19 @@ const handleSubmit = (e) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const filteredFaqs = blogs.filter((faq) => {
-  const search = searchText.toLowerCase();
+//   const filteredFaqs = blogs.filter((faq) => {
+//   const search = searchText.toLowerCase();
 
-  const matchesText =
-    faq.question?.toLowerCase().includes(search) ||
-    faq.answer?.toLowerCase().includes(search) ||
-    faq.category?.name?.toLowerCase().includes(search);
+//   const matchesText =
+//     faq.question?.toLowerCase().includes(search) ||
+//     faq.answer?.toLowerCase().includes(search) ||
+//     faq.category?.name?.toLowerCase().includes(search);
 
-  const matchesStatus =
-    // selectedStatus === "all" || faq.status === selectedStatus;
+//   const matchesStatus =
+//     // selectedStatus === "all" || faq.status === selectedStatus;
 
-  return matchesText && matchesStatus;
-});
+//   return matchesText && matchesStatus;
+// });
 
   
     // useEffect(() => {
