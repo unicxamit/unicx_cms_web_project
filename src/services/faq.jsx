@@ -255,7 +255,7 @@ const handleSubmit = (e) => {
     faq.category?.name?.toLowerCase().includes(search);
 
   const matchesStatus =
-    selectedStatus === "all" || faq.status === selectedStatus;
+    // selectedStatus === "all" || faq.status === selectedStatus;
 
   return matchesText && matchesStatus;
 });
