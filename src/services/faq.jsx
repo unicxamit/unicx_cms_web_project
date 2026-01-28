@@ -341,7 +341,7 @@ const handleSubmit = (e) => {
           {loading ? (
             <Loader/>
           ):(
-         filteredFaqs.map((faq, index) => {
+         blogs.map((faq, index) => {
            
   const categoryName = faq?.category?.[0]?.name || "-";
             return (
@@ -381,7 +381,7 @@ const handleSubmit = (e) => {
             );
           })
         )}
-          {filteredFaqs.length === 0 && (
+          {blogs.length === 0 && (
             <tr>
               <td colSpan="6" className="text-center">
                 No FAQ found.
