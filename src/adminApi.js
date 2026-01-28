@@ -4,7 +4,7 @@ import axios from "axios";
 const api = axios.create({
   // Change this baseURL to your local backend server URL
   // When deploying, you'll change this to your deployed backend URL (e.g., 'https://api.unicx.in')
-  baseURL: "http://localhost:5000/api/v1"
+  baseURL: "https://cms-backend-h5er.onrender.com/api/v1"
   // baseURL:"https://curves-councils-coffee-ecology.trycloudflare.com/api/v1"  ,
   // headers: { 'Content-Type': 'application/json' }
 });
